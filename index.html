@@ -412,6 +412,11 @@
         <div class="issues-list">
             <h3>📋 Issues List</h3>
             <div class="list-controls">
+                <select id="listStatusFilter">
+                    <option value="all">All Issues</option>
+                    <option value="open">Open Only</option>
+                    <option value="closed">Closed Only</option>
+                </select>
                 <select id="sortBy">
                     <option value="date">Sort by Date</option>
                     <option value="title">Sort by Title</option>
@@ -893,10 +898,17 @@
         }
 
         function updateIssuesList() {
+            const listStatusFilter = document.getElementById('listStatusFilter').value;
             const sortBy = document.getElementById('sortBy').value;
             const sortOrder = document.getElementById('sortOrder').value;
             
-            const sortedIssues = [...filteredIssues].sort((a, b) => {
+            // Apply list-specific status filter
+            let listFilteredIssues = [...filteredIssues];
+            if (listStatusFilter !== 'all') {
+                listFilteredIssues = filteredIssues.filter(issue => issue.status === listStatusFilter);
+            }
+            
+            const sortedIssues = [...listFilteredIssues].sort((a, b) => {
                 let aVal, bVal;
                 
                 switch(sortBy) {
@@ -952,6 +964,7 @@
         document.getElementById('endDate').addEventListener('change', filterIssues);
         document.getElementById('statusFilter').addEventListener('change', filterIssues);
         document.getElementById('labelFilter').addEventListener('change', filterIssues);
+        document.getElementById('listStatusFilter').addEventListener('change', updateIssuesList);
         document.getElementById('sortBy').addEventListener('change', updateIssuesList);
         document.getElementById('sortOrder').addEventListener('change', updateIssuesList);
         

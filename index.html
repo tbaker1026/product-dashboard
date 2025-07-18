@@ -304,6 +304,13 @@
             margin-bottom: 30px;
         }
 
+        .resolution-chart-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
         .chart-card {
             background: white;
             padding: 25px;
@@ -421,6 +428,10 @@
                 grid-template-columns: 1fr;
             }
             
+            .resolution-chart-container {
+                grid-template-columns: 1fr;
+            }
+            
             .controls {
                 grid-template-columns: 1fr;
             }
@@ -529,6 +540,15 @@
                 <h3>📊 Open vs Closed</h3>
                 <div class="pie-chart-container">
                     <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="resolution-chart-container">
+            <div class="chart-card">
+                <h3>⏱️ Days to Resolution</h3>
+                <div class="chart-container">
+                    <canvas id="resolutionChart"></canvas>
                 </div>
             </div>
         </div>
@@ -822,7 +842,7 @@
         const gitHubDashboard = new GitHubDashboard();
         let allIssues = [...sampleIssues];
         let filteredIssues = [...sampleIssues];
-        let lineChart, pieChart;
+        let lineChart, pieChart, resolutionChart;
         let currentRepo = null;
         let selectedLabels = [];
 
@@ -1173,6 +1193,154 @@
             });
         }
 
+        function updateResolutionChart() {
+            const ctx = document.getElementById('resolutionChart').getContext('2d');
+            
+            // Get only closed issues with resolution times
+            const closedIssues = filteredIssues
+                .filter(issue => issue.status === 'closed' && issue.closed_at)
+                .map(issue => ({
+                    ...issue,
+                    daysToClose: calculateDaysToClose(issue),
+                    closeDate: new Date(issue.closed_at)
+                }))
+                .filter(issue => issue.daysToClose !== null)
+                .sort((a, b) => a.closeDate - b.closeDate);
+
+            if (closedIssues.length === 0) {
+                if (resolutionChart) {
+                    resolutionChart.destroy();
+                }
+                
+                // Show "No data" message
+                resolutionChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['No Data'],
+                        datasets: [{
+                            label: 'Days to Resolution',
+                            data: [0],
+                            backgroundColor: '#e9ecef',
+                            borderColor: '#dee2e6',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Days to Resolution'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'No closed issues in current filter'
+                                }
+                            }
+                        }
+                    }
+                });
+                return;
+            }
+
+            const labels = closedIssues.map(issue => `#${issue.id}`);
+            const data = closedIssues.map(issue => issue.daysToClose);
+            
+            // Color code bars based on resolution speed
+            const backgroundColors = data.map(days => {
+                if (days === 0) return '#17a2b8'; // Same day - info blue
+                if (days <= 1) return '#28a745'; // 1 day - success green
+                if (days <= 7) return '#ffc107'; // 1 week - warning yellow
+                if (days <= 30) return '#fd7e14'; // 1 month - orange
+                return '#dc3545'; // > 1 month - danger red
+            });
+
+            if (resolutionChart) {
+                resolutionChart.destroy();
+            }
+
+            resolutionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Days to Resolution',
+                        data: data,
+                        backgroundColor: backgroundColors,
+                        borderColor: backgroundColors.map(color => color),
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        borderSkipped: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const index = context[0].dataIndex;
+                                    const issue = closedIssues[index];
+                                    return `Issue ${issue.id}: ${issue.title}`;
+                                },
+                                label: function(context) {
+                                    const days = context.parsed.y;
+                                    if (days === 0) return 'Resolved same day';
+                                    if (days === 1) return 'Resolved in 1 day';
+                                    return `Resolved in ${days} days`;
+                                },
+                                afterLabel: function(context) {
+                                    const index = context.dataIndex;
+                                    const issue = closedIssues[index];
+                                    return [`Opened: ${issue.date}`, `Closed: ${issue.closed_at}`];
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Days to Resolution'
+                            },
+                            ticks: {
+                                stepSize: 1
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Issues (sorted by close date)'
+                            },
+                            ticks: {
+                                maxRotation: 45,
+                                minRotation: 45
+                            }
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index'
+                    }
+                }
+            });
+        }
+
         function updateIssuesList() {
             const listStatusFilter = document.getElementById('listStatusFilter').value;
             const sortBy = document.getElementById('sortBy').value;
@@ -1243,6 +1411,7 @@
             updateStats();
             updateLineChart();
             updatePieChart();
+            updateResolutionChart();
             updateIssuesList();
             document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
         }

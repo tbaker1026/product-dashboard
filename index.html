@@ -538,18 +538,140 @@
             }
         }
 
-        // Sample data for fallback
+        // Sample data based on realistic product-dashboard issues
         const sampleIssues = [
-            { id: 1, title: "Fix login authentication bug", status: "open", date: "2024-07-15", labels: ["bug", "high-priority"] },
-            { id: 2, title: "Add dark mode support", status: "closed", date: "2024-07-10", labels: ["feature", "enhancement"] },
-            { id: 3, title: "Update documentation for API", status: "open", date: "2024-07-12", labels: ["documentation"] },
-            { id: 4, title: "Optimize database queries", status: "closed", date: "2024-07-08", labels: ["enhancement", "performance"] },
-            { id: 5, title: "Implement user profile page", status: "open", date: "2024-07-14", labels: ["feature"] },
-            { id: 6, title: "Fix responsive layout issues", status: "closed", date: "2024-07-05", labels: ["bug", "ui"] },
-            { id: 7, title: "Add unit tests for auth module", status: "open", date: "2024-07-11", labels: ["enhancement", "testing"] },
-            { id: 8, title: "Security vulnerability in login", status: "closed", date: "2024-07-01", labels: ["bug", "security"] },
-            { id: 9, title: "Implement search functionality", status: "open", date: "2024-07-13", labels: ["feature"] },
-            { id: 10, title: "Update dependencies", status: "closed", date: "2024-07-03", labels: ["maintenance"] }
+            { 
+                id: 1, 
+                title: "Add GitHub API rate limiting display", 
+                status: "open", 
+                date: "2025-01-18", 
+                labels: ["feature", "enhancement"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/1", 
+                author: "tbaker1026", 
+                comments: 0,
+                body: "Show remaining API rate limit in dashboard header"
+            },
+            { 
+                id: 2, 
+                title: "Implement repository search functionality", 
+                status: "open", 
+                date: "2025-01-17", 
+                labels: ["feature"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/2", 
+                author: "tbaker1026", 
+                comments: 2,
+                body: "Add search bar to find repositories quickly"
+            },
+            { 
+                id: 3, 
+                title: "Fix mobile responsiveness on charts", 
+                status: "closed", 
+                date: "2025-01-16", 
+                labels: ["bug", "ui", "mobile"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/3", 
+                author: "tbaker1026", 
+                comments: 1,
+                body: "Charts overflow on mobile devices smaller than 480px"
+            },
+            { 
+                id: 4, 
+                title: "Add issue labels analytics", 
+                status: "open", 
+                date: "2025-01-15", 
+                labels: ["feature", "analytics"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/4", 
+                author: "tbaker1026", 
+                comments: 0,
+                body: "Show distribution of issue labels in a separate chart"
+            },
+            { 
+                id: 5, 
+                title: "Implement dark mode theme", 
+                status: "open", 
+                date: "2025-01-14", 
+                labels: ["feature", "ui", "enhancement"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/5", 
+                author: "tbaker1026", 
+                comments: 3,
+                body: "Add toggle for dark mode to improve usability in low light"
+            },
+            { 
+                id: 6, 
+                title: "Update Chart.js to latest version", 
+                status: "closed", 
+                date: "2025-01-13", 
+                labels: ["maintenance", "dependencies"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/6", 
+                author: "tbaker1026", 
+                comments: 1,
+                body: "Upgrade Chart.js from 3.9.1 to latest stable version"
+            },
+            { 
+                id: 7, 
+                title: "Add export functionality for dashboard data", 
+                status: "open", 
+                date: "2025-01-12", 
+                labels: ["feature", "export"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/7", 
+                author: "tbaker1026", 
+                comments: 0,
+                body: "Allow users to export issues data as CSV or JSON"
+            },
+            { 
+                id: 8, 
+                title: "Performance optimization for large repositories", 
+                status: "open", 
+                date: "2025-01-11", 
+                labels: ["enhancement", "performance"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/8", 
+                author: "tbaker1026", 
+                comments: 2,
+                body: "Dashboard slows down with repositories having 1000+ issues"
+            },
+            { 
+                id: 9, 
+                title: "Add README with setup instructions", 
+                status: "closed", 
+                date: "2025-01-10", 
+                labels: ["documentation"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/9", 
+                author: "tbaker1026", 
+                comments: 0,
+                body: "Create comprehensive README with installation and usage guide"
+            },
+            { 
+                id: 10, 
+                title: "Implement issue milestone tracking", 
+                status: "open", 
+                date: "2025-01-09", 
+                labels: ["feature", "milestones"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/10", 
+                author: "tbaker1026", 
+                comments: 1,
+                body: "Show progress of issues grouped by milestones"
+            },
+            { 
+                id: 11, 
+                title: "Fix issue date filtering edge case", 
+                status: "closed", 
+                date: "2025-01-08", 
+                labels: ["bug", "filtering"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/11", 
+                author: "tbaker1026", 
+                comments: 2,
+                body: "Date filter doesn't work correctly for issues created today"
+            },
+            { 
+                id: 12, 
+                title: "Add contributor analytics", 
+                status: "open", 
+                date: "2025-01-07", 
+                labels: ["feature", "analytics", "contributors"], 
+                url: "https://github.com/tbaker1026/product-dashboard/issues/12", 
+                author: "tbaker1026", 
+                comments: 0,
+                body: "Show charts of most active contributors and their activity"
+            }
         ];
 
         // Global variables

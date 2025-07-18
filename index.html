@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issues Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .control-group input,
+        .control-group select {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .stat-card.open h3 { color: #28a745; }
+        .stat-card.closed h3 { color: #dc3545; }
+        .stat-card.total h3 { color: #6f42c1; }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .chart-card h3 {
+            margin-bottom: 20px;
+            color: #2d3748;
+            font-size: 1.25rem;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .pie-chart-container {
+            position: relative;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .issues-list {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e9ecef;
+        }
+
+        .issues-list h3 {
+            margin-bottom: 20px;
+            color: #2d3748;
+            font-size: 1.25rem;
+        }
+
+        .list-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .list-controls select {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .issue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+
+        .issue-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .issue-item.open {
+            border-left-color: #28a745;
+        }
+
+        .issue-item.closed {
+            border-left-color: #dc3545;
+        }
+
+        .issue-title {
+            font-weight: 600;
+            color: #2d3748;
+            flex-grow: 1;
+        }
+
+        .issue-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .issue-status {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .issue-status.open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .issue-status.closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .issue-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>📊 GitHub Issues Dashboard</h1>
+            <div style="color: #6c757d; text-align: right;">
+                <div>Real-time metrics</div>
+                <div style="font-size: 14px;">Last updated: <span id="lastUpdated"></span></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" value="2024-01-01">
+            </div>
+            <div class="control-group">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" value="2024-12-31">
+            </div>
+            <div class="control-group">
+                <label for="statusFilter">Status Filter</label>
+                <select id="statusFilter">
+                    <option value="all">All Issues</option>
+                    <option value="open">Open Only</option>
+                    <option value="closed">Closed Only</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="labelFilter">Label Filter</label>
+                <select id="labelFilter">
+                    <option value="all">All Labels</option>
+                    <option value="bug">Bug</option>
+                    <option value="feature">Feature</option>
+                    <option value="enhancement">Enhancement</option>
+                    <option value="documentation">Documentation</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card open">
+                <h3 id="openCount">0</h3>
+                <p>Open Issues</p>
+            </div>
+            <div class="stat-card closed">
+                <h3 id="closedCount">0</h3>
+                <p>Closed Issues</p>
+            </div>
+            <div class="stat-card total">
+                <h3 id="totalCount">0</h3>
+                <p>Total Issues</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="closureRate">0%</h3>
+                <p>Closure Rate</p>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3>📈 Issues Over Time</h3>
+                <div class="chart-container">
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h3>📊 Open vs Closed</h3>
+                <div class="pie-chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="issues-list">
+            <h3>📋 Issues List</h3>
+            <div class="list-controls">
+                <select id="sortBy">
+                    <option value="date">Sort by Date</option>
+                    <option value="title">Sort by Title</option>
+                    <option value="status">Sort by Status</option>
+                </select>
+                <select id="sortOrder">
+                    <option value="desc">Descending</option>
+                    <option value="asc">Ascending</option>
+                </select>
+            </div>
+            <div id="issuesList"></div>
+        </div>
+    </div>
+
+    <script>
+        // Sample data - replace with actual GitHub API data
+        const sampleIssues = [
+            { id: 1, title: "Fix login authentication bug", status: "open", date: "2024-07-15", labels: ["bug", "high-priority"] },
+            { id: 2, title: "Add dark mode support", status: "closed", date: "2024-07-10", labels: ["feature", "enhancement"] },
+            { id: 3, title: "Update documentation for API", status: "open", date: "2024-07-12", labels: ["documentation"] },
+            { id: 4, title: "Optimize database queries", status: "closed", date: "2024-07-08", labels: ["enhancement", "performance"] },
+            { id: 5, title: "Implement user profile page", status: "open", date: "2024-07-14", labels: ["feature"] },
+            { id: 6, title: "Fix responsive layout issues", status: "closed", date: "2024-07-05", labels: ["bug", "ui"] },
+            { id: 7, title: "Add unit tests for auth module", status: "open", date: "2024-07-11", labels: ["enhancement", "testing"] },
+            { id: 8, title: "Security vulnerability in login", status: "closed", date: "2024-07-01", labels: ["bug", "security"] },
+            { id: 9, title: "Implement search functionality", status: "open", date: "2024-07-13", labels: ["feature"] },
+            { id: 10, title: "Update dependencies", status: "closed", date: "2024-07-03", labels: ["maintenance"] }
+        ];
+
+        let filteredIssues = [...sampleIssues];
+        let lineChart, pieChart;
+
+        function filterIssues() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const labelFilter = document.getElementById('labelFilter').value;
+
+            filteredIssues = sampleIssues.filter(issue => {
+                const issueDate = new Date(issue.date);
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                
+                const dateMatch = issueDate >= start && issueDate <= end;
+                const statusMatch = statusFilter === 'all' || issue.status === statusFilter;
+                const labelMatch = labelFilter === 'all' || issue.labels.includes(labelFilter);
+                
+                return dateMatch && statusMatch && labelMatch;
+            });
+
+            updateDashboard();
+        }
+
+        function updateStats() {
+            const openCount = filteredIssues.filter(i => i.status === 'open').length;
+            const closedCount = filteredIssues.filter(i => i.status === 'closed').length;
+            const totalCount = filteredIssues.length;
+            const closureRate = totalCount > 0 ? Math.round((closedCount / totalCount) * 100) : 0;
+
+            document.getElementById('openCount').textContent = openCount;
+            document.getElementById('closedCount').textContent = closedCount;
+            document.getElementById('totalCount').textContent = totalCount;
+            document.getElementById('closureRate').textContent = closureRate + '%';
+        }
+
+        function updateLineChart() {
+            const ctx = document.getElementById('lineChart').getContext('2d');
+            
+            // Group issues by date
+            const dateGroups = {};
+            filteredIssues.forEach(issue => {
+                const date = issue.date;
+                if (!dateGroups[date]) {
+                    dateGroups[date] = { open: 0, closed: 0 };
+                }
+                dateGroups[date][issue.status]++;
+            });
+
+            const sortedDates = Object.keys(dateGroups).sort();
+            const openData = sortedDates.map(date => dateGroups[date].open);
+            const closedData = sortedDates.map(date => dateGroups[date].closed);
+
+            if (lineChart) {
+                lineChart.destroy();
+            }
+
+            lineChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: sortedDates,
+                    datasets: [{
+                        label: 'Open Issues',
+                        data: openData,
+                        borderColor: '#28a745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Closed Issues',
+                        data: closedData,
+                        borderColor: '#dc3545',
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updatePieChart() {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            
+            const openCount = filteredIssues.filter(i => i.status === 'open').length;
+            const closedCount = filteredIssues.filter(i => i.status === 'closed').length;
+
+            if (pieChart) {
+                pieChart.destroy();
+            }
+
+            pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Open', 'Closed'],
+                    datasets: [{
+                        data: [openCount, closedCount],
+                        backgroundColor: ['#28a745', '#dc3545'],
+                        hoverBackgroundColor: ['#34ce57', '#e85d6b'],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateIssuesList() {
+            const sortBy = document.getElementById('sortBy').value;
+            const sortOrder = document.getElementById('sortOrder').value;
+            
+            const sortedIssues = [...filteredIssues].sort((a, b) => {
+                let aVal, bVal;
+                
+                switch(sortBy) {
+                    case 'date':
+                        aVal = new Date(a.date);
+                        bVal = new Date(b.date);
+                        break;
+                    case 'title':
+                        aVal = a.title.toLowerCase();
+                        bVal = b.title.toLowerCase();
+                        break;
+                    case 'status':
+                        aVal = a.status;
+                        bVal = b.status;
+                        break;
+                }
+                
+                if (sortOrder === 'asc') {
+                    return aVal > bVal ? 1 : -1;
+                } else {
+                    return aVal < bVal ? 1 : -1;
+                }
+            });
+
+            const issuesList = document.getElementById('issuesList');
+            issuesList.innerHTML = sortedIssues.map(issue => `
+                <div class="issue-item ${issue.status}">
+                    <div class="issue-title">${issue.title}</div>
+                    <div class="issue-meta">
+                        <span class="issue-status ${issue.status}">${issue.status}</span>
+                        <span>${issue.date}</span>
+                        <span>${issue.labels.join(', ')}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateDashboard() {
+            updateStats();
+            updateLineChart();
+            updatePieChart();
+            updateIssuesList();
+            document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+        }
+
+        // Event listeners
+        document.getElementById('startDate').addEventListener('change', filterIssues);
+        document.getElementById('endDate').addEventListener('change', filterIssues);
+        document.getElementById('statusFilter').addEventListener('change', filterIssues);
+        document.getElementById('labelFilter').addEventListener('change', filterIssues);
+        document.getElementById('sortBy').addEventListener('change', updateIssuesList);
+        document.getElementById('sortOrder').addEventListener('change', updateIssuesList);
+
+        // Initialize dashboard
+        updateDashboard();
+    </script>
+</body>
+</html>

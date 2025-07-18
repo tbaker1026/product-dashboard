@@ -109,6 +109,120 @@
             font-weight: 600;
         }
 
+        .multi-select-container {
+            position: relative;
+            min-width: 200px;
+        }
+
+        .multi-select-dropdown {
+            position: relative;
+            width: 100%;
+        }
+
+        .multi-select-display {
+            padding: 8px 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .multi-select-display:hover {
+            border-color: #667eea;
+        }
+
+        .multi-select-display.active {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .multi-select-display::after {
+            content: "▼";
+            font-size: 10px;
+            color: #6c757d;
+            transition: transform 0.3s ease;
+        }
+
+        .multi-select-display.active::after {
+            transform: rotate(180deg);
+        }
+
+        .multi-select-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .multi-select-options.show {
+            display: block;
+        }
+
+        .multi-select-option {
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .multi-select-option:hover {
+            background-color: #f8f9fa;
+        }
+
+        .multi-select-option:last-child {
+            border-bottom: none;
+        }
+
+        .multi-select-option input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .multi-select-option label {
+            cursor: pointer;
+            margin: 0;
+            flex-grow: 1;
+            font-size: 14px;
+        }
+
+        .label-count {
+            color: #6c757d;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .selected-labels {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 4px;
+        }
+
+        .selected-label {
+            background: #667eea;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
         .control-group {
             display: flex;
             flex-direction: column;
@@ -417,6 +531,16 @@
                     <option value="open">Open Only</option>
                     <option value="closed">Closed Only</option>
                 </select>
+                <div class="multi-select-container">
+                    <div class="multi-select-dropdown" id="labelMultiSelect">
+                        <div class="multi-select-display" id="labelMultiDisplay">
+                            🏷️ Filter by Labels
+                        </div>
+                        <div class="multi-select-options" id="labelMultiOptions">
+                            <!-- Options will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
                 <select id="sortBy">
                     <option value="date">Sort by Date</option>
                     <option value="title">Sort by Title</option>
@@ -685,6 +809,7 @@
         let filteredIssues = [...sampleIssues];
         let lineChart, pieChart;
         let currentRepo = null;
+        let selectedLabels = [];
 
         async function loadRepositoryData() {
             const owner = document.getElementById('repoOwner').value.trim();
@@ -767,6 +892,120 @@
                         labelFilter.appendChild(option);
                     }
                 });
+                
+            // Also update the multi-select dropdown
+            updateMultiSelectLabels();
+        }
+        
+        function updateMultiSelectLabels() {
+            const allLabels = new Set();
+            const labelCounts = {};
+            
+            filteredIssues.forEach(issue => {
+                issue.labels.forEach(label => {
+                    allLabels.add(label);
+                    labelCounts[label] = (labelCounts[label] || 0) + 1;
+                });
+            });
+            
+            const labelMultiOptions = document.getElementById('labelMultiOptions');
+            labelMultiOptions.innerHTML = '';
+            
+            // Add "Clear All" option
+            const clearAllOption = document.createElement('div');
+            clearAllOption.className = 'multi-select-option';
+            clearAllOption.innerHTML = `
+                <input type="checkbox" id="clearAll" ${selectedLabels.length === 0 ? 'checked' : ''}>
+                <label for="clearAll" style="font-weight: 600; color: #dc3545;">Clear All</label>
+            `;
+            labelMultiOptions.appendChild(clearAllOption);
+            
+            // Add separator
+            const separator = document.createElement('div');
+            separator.style.borderTop = '1px solid #e9ecef';
+            separator.style.margin = '4px 0';
+            labelMultiOptions.appendChild(separator);
+            
+            // Add label options
+            Array.from(allLabels)
+                .sort()
+                .forEach(label => {
+                    const option = document.createElement('div');
+                    option.className = 'multi-select-option';
+                    const isSelected = selectedLabels.includes(label);
+                    option.innerHTML = `
+                        <input type="checkbox" id="label-${label}" ${isSelected ? 'checked' : ''}>
+                        <label for="label-${label}">${label}</label>
+                        <span class="label-count">(${labelCounts[label]})</span>
+                    `;
+                    labelMultiOptions.appendChild(option);
+                });
+        }
+        
+        function initializeMultiSelect() {
+            const multiSelectDisplay = document.getElementById('labelMultiDisplay');
+            const multiSelectOptions = document.getElementById('labelMultiOptions');
+            
+            // Toggle dropdown
+            multiSelectDisplay.addEventListener('click', (e) => {
+                e.stopPropagation();
+                multiSelectOptions.classList.toggle('show');
+                multiSelectDisplay.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!document.getElementById('labelMultiSelect').contains(e.target)) {
+                    multiSelectOptions.classList.remove('show');
+                    multiSelectDisplay.classList.remove('active');
+                }
+            });
+            
+            // Handle option selection
+            multiSelectOptions.addEventListener('change', (e) => {
+                if (e.target.type === 'checkbox') {
+                    if (e.target.id === 'clearAll') {
+                        selectedLabels = [];
+                        updateMultiSelectLabels();
+                    } else {
+                        const label = e.target.id.replace('label-', '');
+                        if (e.target.checked) {
+                            if (!selectedLabels.includes(label)) {
+                                selectedLabels.push(label);
+                            }
+                        } else {
+                            selectedLabels = selectedLabels.filter(l => l !== label);
+                        }
+                    }
+                    updateMultiSelectDisplay();
+                    updateIssuesList();
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside
+            multiSelectOptions.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+        
+        function updateMultiSelectDisplay() {
+            const display = document.getElementById('labelMultiDisplay');
+            
+            if (selectedLabels.length === 0) {
+                display.innerHTML = '🏷️ Filter by Labels';
+            } else {
+                display.innerHTML = `
+                    <div>
+                        <span>🏷️ ${selectedLabels.length} label${selectedLabels.length > 1 ? 's' : ''} selected</span>
+                        <div class="selected-labels">
+                            ${selectedLabels.slice(0, 3).map(label => 
+                                `<span class="selected-label">${label}</span>`
+                            ).join('')}
+                            ${selectedLabels.length > 3 ? `<span class="selected-label">+${selectedLabels.length - 3}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
         }
 
         function filterIssues() {
@@ -908,6 +1147,13 @@
                 listFilteredIssues = filteredIssues.filter(issue => issue.status === listStatusFilter);
             }
             
+            // Apply multi-select label filter
+            if (selectedLabels.length > 0) {
+                listFilteredIssues = listFilteredIssues.filter(issue => 
+                    selectedLabels.some(selectedLabel => issue.labels.includes(selectedLabel))
+                );
+            }
+            
             const sortedIssues = [...listFilteredIssues].sort((a, b) => {
                 let aVal, bVal;
                 
@@ -979,6 +1225,9 @@
 
         // Initialize dashboard with sample data
         updateDashboard();
+        
+        // Initialize multi-select functionality
+        initializeMultiSelect();
         
         // Set default date range to show more recent data
         const today = new Date();

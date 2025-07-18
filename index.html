@@ -223,6 +223,16 @@
             font-weight: 500;
         }
 
+        .days-to-close {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
         .control-group {
             display: flex;
             flex-direction: column;
@@ -636,6 +646,7 @@
                         title: issue.title,
                         status: issue.state,
                         date: issue.created_at.split('T')[0],
+                        closed_at: issue.closed_at ? issue.closed_at.split('T')[0] : null,
                         labels: issue.labels.map(label => label.name),
                         url: issue.html_url,
                         author: issue.user.login,
@@ -696,6 +707,7 @@
                 title: "Fix mobile responsiveness on charts", 
                 status: "closed", 
                 date: "2025-01-16", 
+                closed_at: "2025-01-17",
                 labels: ["bug", "ui", "mobile"], 
                 url: "https://github.com/tbaker1026/product-dashboard/issues/3", 
                 author: "tbaker1026", 
@@ -729,6 +741,7 @@
                 title: "Update Chart.js to latest version", 
                 status: "closed", 
                 date: "2025-01-13", 
+                closed_at: "2025-01-15",
                 labels: ["maintenance", "dependencies"], 
                 url: "https://github.com/tbaker1026/product-dashboard/issues/6", 
                 author: "tbaker1026", 
@@ -762,6 +775,7 @@
                 title: "Add README with setup instructions", 
                 status: "closed", 
                 date: "2025-01-10", 
+                closed_at: "2025-01-12",
                 labels: ["documentation"], 
                 url: "https://github.com/tbaker1026/product-dashboard/issues/9", 
                 author: "tbaker1026", 
@@ -784,6 +798,7 @@
                 title: "Fix issue date filtering edge case", 
                 status: "closed", 
                 date: "2025-01-08", 
+                closed_at: "2025-01-09",
                 labels: ["bug", "filtering"], 
                 url: "https://github.com/tbaker1026/product-dashboard/issues/11", 
                 author: "tbaker1026", 
@@ -1008,6 +1023,28 @@
             }
         }
 
+        function calculateDaysToClose(issue) {
+            if (issue.status !== 'closed' || !issue.closed_at) {
+                return null;
+            }
+            
+            const openDate = new Date(issue.date);
+            const closeDate = new Date(issue.closed_at);
+            const timeDiff = closeDate - openDate;
+            const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            
+            return daysDiff;
+        }
+
+        function formatDaysToClose(days) {
+            if (days === null) return '';
+            if (days === 0) return '🚀 Same day';
+            if (days === 1) return '⚡ 1 day';
+            if (days <= 7) return `⚡ ${days} days`;
+            if (days <= 30) return `📅 ${days} days`;
+            return `🐌 ${days} days`;
+        }
+
         function filterIssues() {
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
@@ -1180,20 +1217,26 @@
             });
 
             const issuesList = document.getElementById('issuesList');
-            issuesList.innerHTML = sortedIssues.map(issue => `
-                <div class="issue-item ${issue.status}">
-                    <div class="issue-title">
-                        ${issue.url ? `<a href="${issue.url}" target="_blank" style="color: inherit; text-decoration: none;">#${issue.id} ${issue.title}</a>` : `#${issue.id} ${issue.title}`}
+            issuesList.innerHTML = sortedIssues.map(issue => {
+                const daysToClose = calculateDaysToClose(issue);
+                const daysDisplay = formatDaysToClose(daysToClose);
+                
+                return `
+                    <div class="issue-item ${issue.status}">
+                        <div class="issue-title">
+                            ${issue.url ? `<a href="${issue.url}" target="_blank" style="color: inherit; text-decoration: none;">#${issue.id} ${issue.title}</a>` : `#${issue.id} ${issue.title}`}
+                        </div>
+                        <div class="issue-meta">
+                            <span class="issue-status ${issue.status}">${issue.status}</span>
+                            <span>${issue.date}</span>
+                            ${issue.author ? `<span>👤 ${issue.author}</span>` : ''}
+                            ${issue.labels.length > 0 ? `<span>🏷️ ${issue.labels.slice(0, 3).join(', ')}${issue.labels.length > 3 ? '...' : ''}</span>` : ''}
+                            ${issue.comments ? `<span>💬 ${issue.comments}</span>` : ''}
+                            ${daysDisplay ? `<span class="days-to-close">${daysDisplay}</span>` : ''}
+                        </div>
                     </div>
-                    <div class="issue-meta">
-                        <span class="issue-status ${issue.status}">${issue.status}</span>
-                        <span>${issue.date}</span>
-                        ${issue.author ? `<span>👤 ${issue.author}</span>` : ''}
-                        ${issue.labels.length > 0 ? `<span>🏷️ ${issue.labels.slice(0, 3).join(', ')}${issue.labels.length > 3 ? '...' : ''}</span>` : ''}
-                        ${issue.comments ? `<span>💬 ${issue.comments}</span>` : ''}
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function updateDashboard() {

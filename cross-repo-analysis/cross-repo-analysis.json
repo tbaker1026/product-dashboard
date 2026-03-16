@@ -1,0 +1,1163 @@
+{
+  "summary": {
+    "totalPRs": 1538,
+    "totalMerged": 1215,
+    "overallMergeRate": "79.0",
+    "dateRange": "2025-04-01 to 2026-03-31",
+    "repositories": 3,
+    "uniqueContributors": 54,
+    "multiRepoContributors": 18,
+    "tripleRepoContributors": 2
+  },
+  "repositories": [
+    {
+      "key": "component-library",
+      "name": "Component Library",
+      "repo": "department-of-veterans-affairs/component-library",
+      "focus": "Web components & React wrappers",
+      "totalPRs": 475,
+      "merged": 377,
+      "mergeRate": "79.4%",
+      "uniqueContributors": 33,
+      "topContributorPct": "18.1%"
+    },
+    {
+      "key": "design-system-docs",
+      "name": "Design System Docs",
+      "repo": "department-of-veterans-affairs/vets-design-system-documentation",
+      "focus": "Documentation & guidance",
+      "totalPRs": 641,
+      "merged": 555,
+      "mergeRate": "86.6%",
+      "uniqueContributors": 31,
+      "topContributorPct": "26.4%"
+    },
+    {
+      "key": "forms-library",
+      "name": "Forms Library (vets-website)",
+      "repo": "department-of-veterans-affairs/vets-website",
+      "focus": "Forms library & patterns",
+      "totalPRs": 422,
+      "merged": 283,
+      "mergeRate": "67.1%",
+      "uniqueContributors": 10,
+      "topContributorPct": "40.5%"
+    }
+  ],
+  "topContributors": [
+    {
+      "author": "humancompanion-usds",
+      "total": 232,
+      "merged": 172,
+      "mergeRate": "74.1%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 63,
+          "merged": 40
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 169,
+          "merged": 132
+        }
+      ]
+    },
+    {
+      "author": "it-harrison",
+      "total": 174,
+      "merged": 137,
+      "mergeRate": "78.7%",
+      "repoCount": 3,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 48,
+          "merged": 42
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 13,
+          "merged": 13
+        },
+        {
+          "repo": "forms-library",
+          "count": 113,
+          "merged": 82
+        }
+      ]
+    },
+    {
+      "author": "rhasselle-oddball",
+      "total": 172,
+      "merged": 90,
+      "mergeRate": "52.3%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        },
+        {
+          "repo": "forms-library",
+          "count": 171,
+          "merged": 89
+        }
+      ]
+    },
+    {
+      "author": "jamigibbs",
+      "total": 109,
+      "merged": 102,
+      "mergeRate": "93.6%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 86,
+          "merged": 80
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 23,
+          "merged": 22
+        }
+      ]
+    },
+    {
+      "author": "laurenvocke-va",
+      "total": 84,
+      "merged": 79,
+      "mergeRate": "94.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 84,
+          "merged": 79
+        }
+      ]
+    },
+    {
+      "author": "powellkerry",
+      "total": 79,
+      "merged": 70,
+      "mergeRate": "88.6%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 71,
+          "merged": 62
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 8,
+          "merged": 8
+        }
+      ]
+    },
+    {
+      "author": "jeana-adhoc",
+      "total": 69,
+      "merged": 66,
+      "mergeRate": "95.7%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 3,
+          "merged": 3
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 66,
+          "merged": 63
+        }
+      ]
+    },
+    {
+      "author": "RyanMunsch",
+      "total": 67,
+      "merged": 56,
+      "mergeRate": "83.6%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 64,
+          "merged": 54
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 3,
+          "merged": 2
+        }
+      ]
+    },
+    {
+      "author": "danbrady",
+      "total": 61,
+      "merged": 51,
+      "mergeRate": "83.6%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 9,
+          "merged": 8
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 52,
+          "merged": 43
+        }
+      ]
+    },
+    {
+      "author": "caw310",
+      "total": 56,
+      "merged": 55,
+      "mergeRate": "98.2%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 56,
+          "merged": 55
+        }
+      ]
+    },
+    {
+      "author": "cadibemma",
+      "total": 54,
+      "merged": 46,
+      "mergeRate": "85.2%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "forms-library",
+          "count": 54,
+          "merged": 46
+        }
+      ]
+    },
+    {
+      "author": "amyleadem",
+      "total": 53,
+      "merged": 36,
+      "mergeRate": "67.9%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 46,
+          "merged": 32
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 7,
+          "merged": 4
+        }
+      ]
+    },
+    {
+      "author": "babsdenney",
+      "total": 47,
+      "merged": 45,
+      "mergeRate": "95.7%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 6,
+          "merged": 5
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 41,
+          "merged": 40
+        }
+      ]
+    },
+    {
+      "author": "Copilot",
+      "total": 33,
+      "merged": 17,
+      "mergeRate": "51.5%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 2,
+          "merged": 0
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 31,
+          "merged": 17
+        }
+      ]
+    },
+    {
+      "author": "dustin-cintron",
+      "total": 32,
+      "merged": 26,
+      "mergeRate": "81.3%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "forms-library",
+          "count": 32,
+          "merged": 26
+        }
+      ]
+    },
+    {
+      "author": "dependabot[bot]",
+      "total": 31,
+      "merged": 20,
+      "mergeRate": "64.5%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 21,
+          "merged": 10
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 10,
+          "merged": 10
+        }
+      ]
+    },
+    {
+      "author": "dominicpadula1",
+      "total": 23,
+      "merged": 20,
+      "mergeRate": "87.0%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 2,
+          "merged": 1
+        },
+        {
+          "repo": "forms-library",
+          "count": 21,
+          "merged": 19
+        }
+      ]
+    },
+    {
+      "author": "ediiotero",
+      "total": 17,
+      "merged": 14,
+      "mergeRate": "82.4%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 16,
+          "merged": 13
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    },
+    {
+      "author": "ndsprinkle",
+      "total": 17,
+      "merged": 15,
+      "mergeRate": "88.2%",
+      "repoCount": 3,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 2,
+          "merged": 2
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 2,
+          "merged": 2
+        },
+        {
+          "repo": "forms-library",
+          "count": 13,
+          "merged": 11
+        }
+      ]
+    },
+    {
+      "author": "eileen-coforma",
+      "total": 16,
+      "merged": 15,
+      "mergeRate": "93.8%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 16,
+          "merged": 15
+        }
+      ]
+    },
+    {
+      "author": "Mottie",
+      "total": 15,
+      "merged": 11,
+      "mergeRate": "73.3%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 4,
+          "merged": 4
+        },
+        {
+          "repo": "forms-library",
+          "count": 11,
+          "merged": 7
+        }
+      ]
+    },
+    {
+      "author": "derekwang99",
+      "total": 11,
+      "merged": 10,
+      "mergeRate": "90.9%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 11,
+          "merged": 10
+        }
+      ]
+    },
+    {
+      "author": "jonichan-ia",
+      "total": 11,
+      "merged": 11,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 11,
+          "merged": 11
+        }
+      ]
+    },
+    {
+      "author": "tbaker1026",
+      "total": 9,
+      "merged": 7,
+      "mergeRate": "77.8%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 9,
+          "merged": 7
+        }
+      ]
+    },
+    {
+      "author": "bellepx0",
+      "total": 8,
+      "merged": 7,
+      "mergeRate": "87.5%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 4,
+          "merged": 3
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 4,
+          "merged": 4
+        }
+      ]
+    },
+    {
+      "author": "longmd",
+      "total": 6,
+      "merged": 6,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 6,
+          "merged": 6
+        }
+      ]
+    },
+    {
+      "author": "allison0034",
+      "total": 4,
+      "merged": 4,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 4,
+          "merged": 4
+        }
+      ]
+    },
+    {
+      "author": "va-dst-bot",
+      "total": 4,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 4,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "erinrwhite",
+      "total": 4,
+      "merged": 3,
+      "mergeRate": "75.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 4,
+          "merged": 3
+        }
+      ]
+    },
+    {
+      "author": "KyleCardwell",
+      "total": 3,
+      "merged": 3,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 3,
+          "merged": 3
+        }
+      ]
+    },
+    {
+      "author": "ataker",
+      "total": 3,
+      "merged": 2,
+      "mergeRate": "66.7%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 3,
+          "merged": 2
+        }
+      ]
+    },
+    {
+      "author": "rsmithadhoc",
+      "total": 3,
+      "merged": 2,
+      "mergeRate": "66.7%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 3,
+          "merged": 2
+        }
+      ]
+    },
+    {
+      "author": "ToddWebDev",
+      "total": 3,
+      "merged": 3,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "forms-library",
+          "count": 3,
+          "merged": 3
+        }
+      ]
+    },
+    {
+      "author": "tfink419",
+      "total": 2,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 2,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "acrollet",
+      "total": 2,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 2,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "adamwhitlock1",
+      "total": 2,
+      "merged": 2,
+      "mergeRate": "100.0%",
+      "repoCount": 2,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        },
+        {
+          "repo": "design-system-docs",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    },
+    {
+      "author": "t-michaud",
+      "total": 2,
+      "merged": 2,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 2,
+          "merged": 2
+        }
+      ]
+    },
+    {
+      "author": "LWWright7",
+      "total": 2,
+      "merged": 2,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "design-system-docs",
+          "count": 2,
+          "merged": 2
+        }
+      ]
+    },
+    {
+      "author": "bryanbassett-va",
+      "total": 2,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "forms-library",
+          "count": 2,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "cosu419",
+      "total": 2,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "forms-library",
+          "count": 2,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "josephrlee",
+      "total": 1,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "TimRoe",
+      "total": 1,
+      "merged": 1,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    },
+    {
+      "author": "Dr-Pongo",
+      "total": 1,
+      "merged": 1,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    },
+    {
+      "author": "macalemid",
+      "total": 1,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "pixiitech",
+      "total": 1,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "andresriveratoro",
+      "total": 1,
+      "merged": 1,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    },
+    {
+      "author": "helene-mccarron",
+      "total": 1,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "seesleestak",
+      "total": 1,
+      "merged": 0,
+      "mergeRate": "0.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 0
+        }
+      ]
+    },
+    {
+      "author": "alex-morgun-1",
+      "total": 1,
+      "merged": 1,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    },
+    {
+      "author": "micahchiang",
+      "total": 1,
+      "merged": 1,
+      "mergeRate": "100.0%",
+      "repoCount": 1,
+      "byRepo": [
+        {
+          "repo": "component-library",
+          "count": 1,
+          "merged": 1
+        }
+      ]
+    }
+  ],
+  "multiRepoContributors": [
+    {
+      "author": "humancompanion-usds",
+      "total": 232,
+      "componentLibrary": 63,
+      "designSystemDocs": 169,
+      "formsLibrary": 0
+    },
+    {
+      "author": "it-harrison",
+      "total": 174,
+      "componentLibrary": 48,
+      "designSystemDocs": 13,
+      "formsLibrary": 113
+    },
+    {
+      "author": "rhasselle-oddball",
+      "total": 172,
+      "componentLibrary": 1,
+      "designSystemDocs": 0,
+      "formsLibrary": 171
+    },
+    {
+      "author": "jamigibbs",
+      "total": 109,
+      "componentLibrary": 86,
+      "designSystemDocs": 23,
+      "formsLibrary": 0
+    },
+    {
+      "author": "powellkerry",
+      "total": 79,
+      "componentLibrary": 71,
+      "designSystemDocs": 8,
+      "formsLibrary": 0
+    },
+    {
+      "author": "jeana-adhoc",
+      "total": 69,
+      "componentLibrary": 3,
+      "designSystemDocs": 66,
+      "formsLibrary": 0
+    },
+    {
+      "author": "RyanMunsch",
+      "total": 67,
+      "componentLibrary": 64,
+      "designSystemDocs": 3,
+      "formsLibrary": 0
+    },
+    {
+      "author": "danbrady",
+      "total": 61,
+      "componentLibrary": 9,
+      "designSystemDocs": 52,
+      "formsLibrary": 0
+    },
+    {
+      "author": "amyleadem",
+      "total": 53,
+      "componentLibrary": 46,
+      "designSystemDocs": 7,
+      "formsLibrary": 0
+    },
+    {
+      "author": "babsdenney",
+      "total": 47,
+      "componentLibrary": 6,
+      "designSystemDocs": 41,
+      "formsLibrary": 0
+    },
+    {
+      "author": "Copilot",
+      "total": 33,
+      "componentLibrary": 2,
+      "designSystemDocs": 31,
+      "formsLibrary": 0
+    },
+    {
+      "author": "dependabot[bot]",
+      "total": 31,
+      "componentLibrary": 21,
+      "designSystemDocs": 10,
+      "formsLibrary": 0
+    },
+    {
+      "author": "dominicpadula1",
+      "total": 23,
+      "componentLibrary": 2,
+      "designSystemDocs": 0,
+      "formsLibrary": 21
+    },
+    {
+      "author": "ediiotero",
+      "total": 17,
+      "componentLibrary": 16,
+      "designSystemDocs": 1,
+      "formsLibrary": 0
+    },
+    {
+      "author": "ndsprinkle",
+      "total": 17,
+      "componentLibrary": 2,
+      "designSystemDocs": 2,
+      "formsLibrary": 13
+    },
+    {
+      "author": "Mottie",
+      "total": 15,
+      "componentLibrary": 4,
+      "designSystemDocs": 0,
+      "formsLibrary": 11
+    },
+    {
+      "author": "bellepx0",
+      "total": 8,
+      "componentLibrary": 4,
+      "designSystemDocs": 4,
+      "formsLibrary": 0
+    },
+    {
+      "author": "adamwhitlock1",
+      "total": 2,
+      "componentLibrary": 1,
+      "designSystemDocs": 1,
+      "formsLibrary": 0
+    }
+  ],
+  "tripleRepoContributors": [
+    {
+      "author": "it-harrison",
+      "total": 174,
+      "componentLibrary": 48,
+      "designSystemDocs": 13,
+      "formsLibrary": 113
+    },
+    {
+      "author": "ndsprinkle",
+      "total": 17,
+      "componentLibrary": 2,
+      "designSystemDocs": 2,
+      "formsLibrary": 13
+    }
+  ],
+  "monthlyData": {
+    "2026-03": {
+      "component-library": {
+        "count": 18,
+        "merged": 10
+      },
+      "design-system-docs": {
+        "count": 30,
+        "merged": 24
+      },
+      "forms-library": {
+        "count": 15,
+        "merged": 6
+      }
+    },
+    "2026-02": {
+      "component-library": {
+        "count": 54,
+        "merged": 40
+      },
+      "design-system-docs": {
+        "count": 92,
+        "merged": 70
+      },
+      "forms-library": {
+        "count": 37,
+        "merged": 28
+      }
+    },
+    "2026-01": {
+      "component-library": {
+        "count": 28,
+        "merged": 24
+      },
+      "design-system-docs": {
+        "count": 76,
+        "merged": 49
+      },
+      "forms-library": {
+        "count": 28,
+        "merged": 23
+      }
+    },
+    "2025-12": {
+      "component-library": {
+        "count": 32,
+        "merged": 22
+      },
+      "design-system-docs": {
+        "count": 27,
+        "merged": 25
+      },
+      "forms-library": {
+        "count": 38,
+        "merged": 25
+      }
+    },
+    "2025-11": {
+      "component-library": {
+        "count": 57,
+        "merged": 46
+      },
+      "design-system-docs": {
+        "count": 51,
+        "merged": 44
+      },
+      "forms-library": {
+        "count": 46,
+        "merged": 35
+      }
+    },
+    "2025-10": {
+      "component-library": {
+        "count": 45,
+        "merged": 37
+      },
+      "design-system-docs": {
+        "count": 40,
+        "merged": 31
+      },
+      "forms-library": {
+        "count": 57,
+        "merged": 44
+      }
+    },
+    "2025-09": {
+      "component-library": {
+        "count": 52,
+        "merged": 34
+      },
+      "design-system-docs": {
+        "count": 37,
+        "merged": 31
+      },
+      "forms-library": {
+        "count": 50,
+        "merged": 33
+      }
+    },
+    "2025-08": {
+      "component-library": {
+        "count": 33,
+        "merged": 27
+      },
+      "design-system-docs": {
+        "count": 24,
+        "merged": 24
+      },
+      "forms-library": {
+        "count": 20,
+        "merged": 16
+      }
+    },
+    "2025-07": {
+      "component-library": {
+        "count": 43,
+        "merged": 39
+      },
+      "design-system-docs": {
+        "count": 57,
+        "merged": 55
+      },
+      "forms-library": {
+        "count": 23,
+        "merged": 17
+      }
+    },
+    "2025-06": {
+      "component-library": {
+        "count": 47,
+        "merged": 41
+      },
+      "design-system-docs": {
+        "count": 82,
+        "merged": 79
+      },
+      "forms-library": {
+        "count": 42,
+        "merged": 23
+      }
+    },
+    "2025-05": {
+      "component-library": {
+        "count": 33,
+        "merged": 27
+      },
+      "design-system-docs": {
+        "count": 75,
+        "merged": 74
+      },
+      "forms-library": {
+        "count": 36,
+        "merged": 19
+      }
+    },
+    "2025-04": {
+      "component-library": {
+        "count": 33,
+        "merged": 30
+      },
+      "design-system-docs": {
+        "count": 50,
+        "merged": 49
+      },
+      "forms-library": {
+        "count": 30,
+        "merged": 14
+      }
+    }
+  }
+}

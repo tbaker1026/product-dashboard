@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VA.gov Prefill Pattern Visualization</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #112e51 0%, #205493 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: #f1f3f5;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #112e51;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .architecture {
+            padding: 40px;
+        }
+
+        .architecture h2 {
+            color: #112e51;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .flow-box {
+            background: white;
+            border: 3px solid #112e51;
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 250px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .flow-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+        }
+
+        .flow-box.data-source {
+            background: #e3f2fd;
+            border-color: #1976d2;
+        }
+
+        .flow-box.backend {
+            background: #fff3e0;
+            border-color: #f57c00;
+        }
+
+        .flow-box.frontend {
+            background: #f3e5f5;
+            border-color: #7b1fa2;
+        }
+
+        .flow-box.component {
+            background: #e8f5e9;
+            border-color: #388e3c;
+        }
+
+        .flow-box h3 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .flow-box ul {
+            list-style: none;
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .flow-box ul li {
+            padding: 3px 0;
+        }
+
+        .arrow {
+            font-size: 2em;
+            color: #112e51;
+            font-weight: bold;
+        }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .component-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            border-left: 5px solid #112e51;
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .component-card.recommended {
+            border-left-color: #28a745;
+        }
+
+        .component-card.complex {
+            border-left-color: #ffc107;
+        }
+
+        .component-card.deprecated {
+            border-left-color: #dc3545;
+            opacity: 0.7;
+        }
+
+        .component-card.consider {
+            border-left-color: #17a2b8;
+        }
+
+        .component-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .component-header h3 {
+            color: #112e51;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .badge.recommended {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge.complex {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge.deprecated {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge.consider {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .component-stats {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .component-stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .component-stat .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #112e51;
+        }
+
+        .component-stat .label {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .component-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .component-features {
+            margin-top: 15px;
+        }
+
+        .component-features h4 {
+            color: #112e51;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .component-features ul {
+            list-style: none;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .component-features ul li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .component-features ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .component-features ul.cons li:before {
+            content: "✗";
+            color: #dc3545;
+        }
+
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        .decision-matrix {
+            padding: 40px;
+            background: white;
+        }
+
+        .decision-matrix h2 {
+            color: #112e51;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .decision-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .decision-table thead {
+            background: #112e51;
+            color: white;
+        }
+
+        .decision-table th,
+        .decision-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .decision-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .decision-table tbody tr td:last-child {
+            font-weight: bold;
+            color: #112e51;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+            background: #f8f9fa;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+
+        .legend-color.recommended {
+            background: #28a745;
+        }
+
+        .legend-color.complex {
+            background: #ffc107;
+        }
+
+        .legend-color.deprecated {
+            background: #dc3545;
+        }
+
+        .legend-color.consider {
+            background: #17a2b8;
+        }
+
+        .footer {
+            background: #112e51;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .component-card,
+            .flow-box {
+                break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VA.gov Prefill Pattern</h1>
+            <p>Architecture, Components, and Implementation Guide</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number">6</div>
+                <div class="label">Prefill Variations</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">3,541</div>
+                <div class="label">Total Lines of Code</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">25</div>
+                <div class="label">Forms Using Prefill</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">147</div>
+                <div class="label">Total VA.gov Forms</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">17%</div>
+                <div class="label">Adoption Rate</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">122</div>
+                <div class="label">Forms to Migrate</div>
+            </div>
+        </div>
+
+        <div class="architecture">
+            <h2>Architecture & Data Flow</h2>
+
+            <div class="flow-diagram">
+                <div class="flow-row">
+                    <div class="flow-box data-source">
+                        <h3>📊 Data Sources</h3>
+                        <ul>
+                            <li>VA Profile API</li>
+                            <li>Master Veteran Index (MVI)</li>
+                            <li>Disability Rating API</li>
+                            <li>Form-specific endpoints</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-row">
+                    <div class="flow-box backend">
+                        <h3>⚙️ Backend (vets-api)</h3>
+                        <ul>
+                            <li>Prefill Service</li>
+                            <li>Data aggregation</li>
+                            <li>Normalization</li>
+                            <li>JSON response</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-row">
+                    <div class="flow-box frontend">
+                        <h3>💾 Redux Store</h3>
+                        <ul>
+                            <li>form.data.prefill</li>
+                            <li>State management</li>
+                            <li>Cached data</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-row">
+                    <div class="flow-box frontend">
+                        <h3>🔄 Prefill Processing</h3>
+                        <ul>
+                            <li>prefillTransformer (if configured)</li>
+                            <li>Data transformation</li>
+                            <li>Schema mapping</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-row">
+                    <div class="flow-box component">
+                        <h3>🎨 UI Components</h3>
+                        <ul>
+                            <li>ContactInfo Component</li>
+                            <li>PersonalInformation Component</li>
+                            <li>PrefillMessage Component</li>
+                            <li>Form Fields</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="arrow">↓</div>
+
+                <div class="flow-row">
+                    <div class="flow-box component">
+                        <h3>👤 User Interaction</h3>
+                        <ul>
+                            <li>View prefilled data</li>
+                            <li>Edit/update values</li>
+                            <li>Submit form</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color recommended"></div>
+                <span>Recommended</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color complex"></div>
+                <span>Use for Complex Cases</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color consider"></div>
+                <span>Consider</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color deprecated"></div>
+                <span>Deprecated</span>
+            </div>
+        </div>
+
+        <div class="components-grid">
+            <!-- ContactInfo Component -->
+            <div class="component-card recommended">
+                <div class="component-header">
+                    <div>
+                        <h3>ContactInfo Component</h3>
+                        <span class="badge recommended">Recommended</span>
+                    </div>
+                </div>
+                <div class="component-stats">
+                    <div class="component-stat">
+                        <div class="value">824</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">25</div>
+                        <div class="label">Applications</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">17%</div>
+                        <div class="label">Adoption</div>
+                    </div>
+                </div>
+                <div class="component-description">
+                    Review page component that displays contact information with edit capability. Allows users to verify and update phone, email, and address.
+                </div>
+                <div class="component-features">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Consistent UX across forms</li>
+                        <li>Built-in validation</li>
+                        <li>No custom code needed</li>
+                        <li>Automatic VA Profile integration</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+import ContactInfo from 'platform/forms-system/src/js/components/ContactInfo';
+
+&lt;ContactInfo
+  formContext={formContext}
+  data={formData}
+  page={page}
+/&gt;
+                </div>
+            </div>
+
+            <!-- PersonalInformation Component -->
+            <div class="component-card recommended">
+                <div class="component-header">
+                    <div>
+                        <h3>PersonalInformation Component</h3>
+                        <span class="badge recommended">Recommended</span>
+                    </div>
+                </div>
+                <div class="component-stats">
+                    <div class="component-stat">
+                        <div class="value">530</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">12</div>
+                        <div class="label">Applications</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">8%</div>
+                        <div class="label">Adoption</div>
+                    </div>
+                </div>
+                <div class="component-description">
+                    Review page component for displaying personal information (name, date of birth, SSN, gender). Read-only display with secure SSN masking.
+                </div>
+                <div class="component-features">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Simple to use</li>
+                        <li>Consistent display</li>
+                        <li>Secure SSN masking</li>
+                        <li>No custom code needed</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+import PersonalInformation from 'platform/forms-system/.../PersonalInformation';
+
+&lt;PersonalInformation
+  formData={formData}
+  showMask={true}
+/&gt;
+                </div>
+            </div>
+
+            <!-- prefillTransformer -->
+            <div class="component-card complex">
+                <div class="component-header">
+                    <div>
+                        <h3>prefillTransformer Function</h3>
+                        <span class="badge complex">Complex Cases</span>
+                    </div>
+                </div>
+                <div class="component-stats">
+                    <div class="component-stat">
+                        <div class="value">1,906</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">19</div>
+                        <div class="label">Applications</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">13%</div>
+                        <div class="label">Adoption</div>
+                    </div>
+                </div>
+                <div class="component-description">
+                    Custom transformation functions in each form's config that map data from VA Profile/MVI to the form's data structure. Maximum flexibility for complex scenarios.
+                </div>
+                <div class="component-features">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Maximum flexibility</li>
+                        <li>Form-specific customization</li>
+                        <li>Handles complex data structures</li>
+                    </ul>
+                    <h4>Cons:</h4>
+                    <ul class="cons">
+                        <li>Requires custom code per form</li>
+                        <li>High maintenance burden</li>
+                        <li>No code reuse</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+prefillTransformer: (pages, formData, metadata, state) => {
+  return {
+    pages,
+    formData: {
+      veteranFullName: {
+        first: formData.firstName,
+        last: formData.lastName,
+      },
+      // Custom transformations...
+    },
+    metadata
+  };
+}
+                </div>
+            </div>
+
+            <!-- PrefillMessage Component -->
+            <div class="component-card recommended">
+                <div class="component-header">
+                    <div>
+                        <h3>PrefillMessage Component</h3>
+                        <span class="badge recommended">Recommended</span>
+                    </div>
+                </div>
+                <div class="component-stats">
+                    <div class="component-stat">
+                        <div class="value">23</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">6</div>
+                        <div class="label">Applications</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">4%</div>
+                        <div class="label">Adoption</div>
+                    </div>
+                </div>
+                <div class="component-description">
+                    Alert message component shown at the start of a form to inform users that some information has been prefilled from their VA Profile.
+                </div>
+                <div class="component-features">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>Very simple</li>
+                        <li>Clear communication</li>
+                        <li>Customizable content</li>
+                        <li>Links to VA Profile</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+import PrefillMessage from 'platform/forms/save-in-progress/PrefillMessage';
+
+&lt;PrefillMessage formContext={formContext}&gt;
+  Some information has been prefilled from your VA Profile.
+&lt;/PrefillMessage&gt;
+                </div>
+            </div>
+
+            <!-- profileContactInfo Pattern -->
+            <div class="component-card consider">
+                <div class="component-header">
+                    <div>
+                        <h3>profileContactInfo Pattern</h3>
+                        <span class="badge consider">Consider</span>
+                    </div>
+                </div>
+                <div class="component-stats">
+                    <div class="component-stat">
+                        <div class="value">258</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">5</div>
+                        <div class="label">Applications</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">3%</div>
+                        <div class="label">Adoption</div>
+                    </div>
+                </div>
+                <div class="component-description">
+                    Form definition pattern that provides prefill schemas and UI schemas for contact information fields. Declarative approach with automatic VA Profile integration.
+                </div>
+                <div class="component-features">
+                    <h4>Pros:</h4>
+                    <ul>
+                        <li>No custom transformation code</li>
+                        <li>Platform-maintained</li>
+                        <li>Built-in validation</li>
+                    </ul>
+                    <h4>Cons:</h4>
+                    <ul class="cons">
+                        <li>Low adoption (only 5 forms)</li>
+                        <li>Limited customization</li>
+                        <li>Less community support</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+import { profileContactInfo } from 'platform/forms-system/.../profileContactInfo';
+
+contactInfoPage: {
+  ...profileContactInfo({
+    required: ['phone', 'email'],
+    label: 'Contact information',
+  }),
+}
+                </div>
+            </div>
+
+            <!-- Direct formData Prepopulation -->
+            <div class="component-card deprecated">
+                <div class="component-header">
+                    <div>
+                        <h3>Direct formData Prepopulation</h3>
+                        <span class="badge deprecated">Deprecated</span>
+                    </div>
+                </div>
+                <div class="component-stats">
+                    <div class="component-stat">
+                        <div class="value">0</div>
+                        <div class="label">Lines of Code</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">18</div>
+                        <div class="label">Applications</div>
+                    </div>
+                    <div class="component-stat">
+                        <div class="value">12%</div>
+                        <div class="label">Adoption</div>
+                    </div>
+                </div>
+                <div class="component-description">
+                    Pattern where forms directly set initialData or defaultFormData in the Redux store on form load. No dedicated component, just direct state manipulation.
+                </div>
+                <div class="component-features">
+                    <h4>Why Deprecated:</h4>
+                    <ul class="cons">
+                        <li>No code reuse</li>
+                        <li>Inconsistent implementations</li>
+                        <li>Hard to maintain</li>
+                        <li>No validation</li>
+                        <li>Error-prone</li>
+                    </ul>
+                </div>
+                <div class="code-example">
+// DO NOT USE - Deprecated pattern
+const initialData = {
+  veteranFullName: {
+    first: user.profile.firstName,
+    last: user.profile.lastName,
+  },
+};
+dispatch(setData(initialData));
+                </div>
+            </div>
+        </div>
+
+        <div class="decision-matrix">
+            <h2>Decision Matrix: Which Approach to Use?</h2>
+            <table class="decision-table">
+                <thead>
+                    <tr>
+                        <th>Scenario</th>
+                        <th>Recommended Approach</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Contact info on review page (phone, email, address)</td>
+                        <td>ContactInfo Component</td>
+                    </tr>
+                    <tr>
+                        <td>Personal info on review page (name, DOB, SSN)</td>
+                        <td>PersonalInformation Component</td>
+                    </tr>
+                    <tr>
+                        <td>Complex custom data transformations needed</td>
+                        <td>prefillTransformer Function</td>
+                    </tr>
+                    <tr>
+                        <td>Combining multiple data sources</td>
+                        <td>prefillTransformer Function</td>
+                    </tr>
+                    <tr>
+                        <td>Conditional prefill logic</td>
+                        <td>prefillTransformer Function</td>
+                    </tr>
+                    <tr>
+                        <td>Simple declarative contact fields</td>
+                        <td>profileContactInfo Pattern</td>
+                    </tr>
+                    <tr>
+                        <td>Inform users about prefilled data</td>
+                        <td>PrefillMessage Component</td>
+                    </tr>
+                    <tr>
+                        <td>Direct Redux state manipulation</td>
+                        <td>❌ DO NOT USE (deprecated)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p><strong>VA.gov Prefill Pattern Documentation</strong></p>
+            <p>Last Updated: March 15, 2026 | Total Variations: 6 | Total LOC: 3,541</p>
+            <p>Platform Team • Forms System</p>
+        </div>
+    </div>
+
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.component-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = this.style.transform === 'scale(1.02)' ? 'scale(1)' : 'scale(1.02)';
+            });
+        });
+
+        // Print button
+        console.log('Prefill Pattern Visualization loaded. Press Ctrl+P to print.');
+    </script>
+</body>
+</html>

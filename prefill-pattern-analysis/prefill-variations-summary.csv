@@ -1,0 +1,7 @@
+Rank,Name,Type,Lines of Code,Applications Using,Total Files,Adoption Rate,Initial Build Time,Per-Form Effort,Complexity,Status,Description
+1,ContactInfo Component,Component,824,25,90,17%,2-3 weeks,None (reuse),Medium,Recommended,Review page component for contact info with edit capability
+2,prefillTransformer,Function,1906,19,36,13%,N/A (per-form),1-5 days,High (varies),Use for complex cases,Custom transformation functions in form configs
+3,Direct formData Prepopulation,Pattern,0,18,60,12%,N/A,1-2 hours,Low,Deprecated,Direct Redux state manipulation (legacy pattern)
+4,PersonalInformation Component,Component,530,12,26,8%,1-2 weeks,None (reuse),Low-medium,Recommended,"Review page component for personal data (name, DOB, SSN)"
+5,PrefillMessage Component,Component,23,6,24,4%,1-2 days,None (reuse),Low,Recommended,Alert message shown when data is prefilled
+6,profileContactInfo pattern,Pattern,258,5,14,3%,1-2 weeks,None (reuse),Medium-high,Consider,Declarative form definition pattern for VA Profile prefill

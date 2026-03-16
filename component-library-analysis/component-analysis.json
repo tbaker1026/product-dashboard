@@ -1,0 +1,2240 @@
+{
+  "summary": {
+    "totalPRs": 475,
+    "componentPRs": 259,
+    "nonComponentPRs": 216,
+    "uniqueComponents": 56,
+    "averagePRsPerComponent": 4.625
+  },
+  "components": [
+    {
+      "name": "va-file-input",
+      "totalPRs": 36,
+      "merged": 30,
+      "mergeRate": "83.3",
+      "byType": {
+        "Feature": 16,
+        "Other": 15,
+        "Bug Fix": 4,
+        "Accessibility": 1
+      },
+      "topContributors": [
+        {
+          "author": "it-harrison",
+          "count": 9
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 8
+        },
+        {
+          "author": "powellkerry",
+          "count": 7
+        },
+        {
+          "author": "jamigibbs",
+          "count": 6
+        },
+        {
+          "author": "ataker",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2027,
+          "title": "va-file-input/va-file-input-multiple: Add support for backwards compatibility of password change/submission",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2027"
+        },
+        {
+          "number": 2024,
+          "title": "Revert changes for file-input pw button",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2024"
+        },
+        {
+          "number": 2006,
+          "title": "va-file-input: update the upload cancellation behavior",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2006"
+        }
+      ]
+    },
+    {
+      "name": "va-modal",
+      "totalPRs": 17,
+      "merged": 14,
+      "mergeRate": "82.4",
+      "byType": {
+        "Other": 8,
+        "Bug Fix": 5,
+        "Testing": 1,
+        "Accessibility": 1,
+        "Feature": 2
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 6
+        },
+        {
+          "author": "danbrady",
+          "count": 3
+        },
+        {
+          "author": "amyleadem",
+          "count": 3
+        },
+        {
+          "author": "jamigibbs",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2017,
+          "title": "va-modal: Spacing tweaks",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2017"
+        },
+        {
+          "number": 1984,
+          "title": "va-modal: Update spacing and button layout",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1984"
+        },
+        {
+          "number": 1983,
+          "title": "va-modal: Update spacing and buttons layout",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1983"
+        }
+      ]
+    },
+    {
+      "name": "va-combo-box",
+      "totalPRs": 12,
+      "merged": 10,
+      "mergeRate": "83.3",
+      "byType": {
+        "Other": 10,
+        "Feature": 1,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "KyleCardwell",
+          "count": 3
+        },
+        {
+          "author": "it-harrison",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "amyleadem",
+          "count": 2
+        },
+        {
+          "author": "tfink419",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2030,
+          "title": "va-combo-box: synchronize component values",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2030"
+        },
+        {
+          "number": 1923,
+          "title": "va-combo-box: reference data attributes to determine if inside a va-t…",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1923"
+        },
+        {
+          "number": 1852,
+          "title": "va-combo-box: update logic to prevent duplicate optgroup headers, ensure optgroup headers show when children visible",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1852"
+        }
+      ]
+    },
+    {
+      "name": "va-alert",
+      "totalPRs": 10,
+      "merged": 9,
+      "mergeRate": "90.0",
+      "byType": {
+        "Feature": 5,
+        "Bug Fix": 3,
+        "Other": 2
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 3
+        },
+        {
+          "author": "jamigibbs",
+          "count": 3
+        },
+        {
+          "author": "rhasselle-oddball",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "ediiotero",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1998,
+          "title": "va-alert: add sr-only text for status when no child elements in slot",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1998"
+        },
+        {
+          "number": 1869,
+          "title": "va-alert: fix heading disapearing when hiding and showing",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1869"
+        },
+        {
+          "number": 1847,
+          "title": "va-alert: add screen reader text to announce alert status ",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1847"
+        }
+      ]
+    },
+    {
+      "name": "va-memorable-date",
+      "totalPRs": 9,
+      "merged": 8,
+      "mergeRate": "88.9",
+      "byType": {
+        "Feature": 7,
+        "Other": 2
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 4
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "it-harrison",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "Mottie",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1920,
+          "title": "va-memorable-date: update Storybook examples & remove padding on legend",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1920"
+        },
+        {
+          "number": 1831,
+          "title": "va-memorable-date: prevent race conditions with external validation",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1831"
+        },
+        {
+          "number": 1793,
+          "title": "va-memorable-date: Add translations for date hint and pass hint portions to child input components",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1793"
+        }
+      ]
+    },
+    {
+      "name": "va-input-telephone",
+      "totalPRs": 9,
+      "merged": 8,
+      "mergeRate": "88.9",
+      "byType": {
+        "Other": 6,
+        "Feature": 2,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "it-harrison",
+          "count": 6
+        },
+        {
+          "author": "amyleadem",
+          "count": 2
+        },
+        {
+          "author": "danbrady",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1657,
+          "title": "va-input-telephone: update payload to include touched status",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1657"
+        },
+        {
+          "number": 1652,
+          "title": "va-input-telephone: add margin to top of component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1652"
+        },
+        {
+          "number": 1635,
+          "title": "va-input-telephone: tweak validation / event emit",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1635"
+        }
+      ]
+    },
+    {
+      "name": "va-link",
+      "totalPRs": 8,
+      "merged": 7,
+      "mergeRate": "87.5",
+      "byType": {
+        "Bug Fix": 5,
+        "Other": 2,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "jamigibbs",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "ediiotero",
+          "count": 1
+        },
+        {
+          "author": "it-harrison",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2022,
+          "title": "Megemenu (va.gov navigation menu): Fix link and content overflow",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2022"
+        },
+        {
+          "number": 2014,
+          "title": "Fix link from Storybook to Design System docs - Crisis Line Modal",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2014"
+        },
+        {
+          "number": 1908,
+          "title": "va-link: support simultaneous download and external props",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1908"
+        }
+      ]
+    },
+    {
+      "name": "va-accordion",
+      "totalPRs": 8,
+      "merged": 5,
+      "mergeRate": "62.5",
+      "byType": {
+        "Other": 4,
+        "Bug Fix": 2,
+        "Testing": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "amyleadem",
+          "count": 5
+        },
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "it-harrison",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1975,
+          "title": "va-accordion: make expand/collapse all buttons icon-buttons",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1975"
+        },
+        {
+          "number": 1788,
+          "title": "[Test] Fix Accordion headline slots in NVDA",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1788"
+        },
+        {
+          "number": 1772,
+          "title": "va-accordion: Create separate buttons for \"expand all\" and \"collapse all\"",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1772"
+        }
+      ]
+    },
+    {
+      "name": "va-table",
+      "totalPRs": 8,
+      "merged": 6,
+      "mergeRate": "75.0",
+      "byType": {
+        "Feature": 6,
+        "Other": 2
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 4
+        },
+        {
+          "author": "ediiotero",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1937,
+          "title": "va-table: add title summary prop",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1937"
+        },
+        {
+          "number": 1907,
+          "title": "va-table: add caption summary and focus props",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1907"
+        },
+        {
+          "number": 1825,
+          "title": "va-table: Empty cell text",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1825"
+        }
+      ]
+    },
+    {
+      "name": "va-telephone-input",
+      "totalPRs": 7,
+      "merged": 6,
+      "mergeRate": "85.7",
+      "byType": {
+        "Other": 6,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "it-harrison",
+          "count": 3
+        },
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2028,
+          "title": "va-telephone-input: always include full contact in event payload regardless of validity",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2028"
+        },
+        {
+          "number": 2001,
+          "title": "va-telephone-input: Remove tabindex from telephone input wrapper",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2001"
+        },
+        {
+          "number": 1744,
+          "title": "va-telephone-input: Correct width/media query breakpoint",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1744"
+        }
+      ]
+    },
+    {
+      "name": "va-file-input-multiple",
+      "totalPRs": 7,
+      "merged": 6,
+      "mergeRate": "85.7",
+      "byType": {
+        "Feature": 3,
+        "Other": 4
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 3
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "ediiotero",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "it-harrison",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2000,
+          "title": "va-file-input-multiple: Add `vaMultipleError` to component and fix bug in encrypted file story",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2000"
+        },
+        {
+          "number": 1976,
+          "title": "VA-file-input-multiple iOS/VoiceOver/Safari modal bug",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1976"
+        },
+        {
+          "number": 1868,
+          "title": "va-file-input-multiple: update label markup",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1868"
+        }
+      ]
+    },
+    {
+      "name": "va-text-input",
+      "totalPRs": 6,
+      "merged": 5,
+      "mergeRate": "83.3",
+      "byType": {
+        "Feature": 5,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "josephrlee",
+          "count": 1
+        },
+        {
+          "author": "babsdenney",
+          "count": 1
+        },
+        {
+          "author": "jamigibbs",
+          "count": 1
+        },
+        {
+          "author": "Mottie",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2018,
+          "title": "[va-text-input] Add z-index to input field and symbol",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2018"
+        },
+        {
+          "number": 1839,
+          "title": "va-text-input: Add password input story to TextInput USWDS",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1839"
+        },
+        {
+          "number": 1798,
+          "title": "va-text-input: add the vaInput custom event",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1798"
+        }
+      ]
+    },
+    {
+      "name": "va-sidenav",
+      "totalPRs": 6,
+      "merged": 6,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 2,
+        "Other": 4
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 3
+        },
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "Dr-Pongo",
+          "count": 1
+        },
+        {
+          "author": "andresriveratoro",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1992,
+          "title": "va-sidenav: Add stories for mobile-header and nav-aria-label props ",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1992"
+        },
+        {
+          "number": 1955,
+          "title": "va-sidenav: Updating mobile accordion header and label ",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1955"
+        },
+        {
+          "number": 1722,
+          "title": "va-sidenav: use medium-screen breakpoint for mobile view",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1722"
+        }
+      ]
+    },
+    {
+      "name": "va-segmented-progress-bar",
+      "totalPRs": 6,
+      "merged": 4,
+      "mergeRate": "66.7",
+      "byType": {
+        "Other": 4,
+        "Accessibility": 1,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "amyleadem",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "ataker",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1917,
+          "title": "va-segmented-progress-bar: Use single span for accessible text.",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1917"
+        },
+        {
+          "number": 1735,
+          "title": "va-segmented-progress-bar: Improve clarity of screen reader announcement",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1735"
+        },
+        {
+          "number": 1734,
+          "title": "va-segmented-progress-bar: Create header aria-label for clearer screen reader announcement",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1734"
+        }
+      ]
+    },
+    {
+      "name": "va-icon",
+      "totalPRs": 6,
+      "merged": 6,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 5,
+        "Other": 1
+      },
+      "topContributors": [
+        {
+          "author": "babsdenney",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "danbrady",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1866,
+          "title": "va-icon: Added expand_circle_right icon",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1866"
+        },
+        {
+          "number": 1679,
+          "title": "va-icon: add threads icon",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1679"
+        },
+        {
+          "number": 1670,
+          "title": "va-icon: Added mark_email_read icon",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1670"
+        }
+      ]
+    },
+    {
+      "name": "va-date",
+      "totalPRs": 5,
+      "merged": 2,
+      "mergeRate": "40.0",
+      "byType": {
+        "Other": 3,
+        "Bug Fix": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "ediiotero",
+          "count": 1
+        },
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "pixiitech",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1962,
+          "title": "VA Memorable Date: error on blur",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1962"
+        },
+        {
+          "number": 1903,
+          "title": "Date components: Validation updates for better error management",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1903"
+        },
+        {
+          "number": 1771,
+          "title": "[va-date]: Fix alignment of year label",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1771"
+        }
+      ]
+    },
+    {
+      "name": "va-tag-status",
+      "totalPRs": 5,
+      "merged": 4,
+      "mergeRate": "80.0",
+      "byType": {
+        "Other": 4,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "babsdenney",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1958,
+          "title": "va-tag-status: Make info story the default story, update link to docs page",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1958"
+        },
+        {
+          "number": 1939,
+          "title": "va-tag-status: rename \"informational\" to \"info\"",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1939"
+        },
+        {
+          "number": 1924,
+          "title": "va-tag-status: Update guidance link for status tag",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1924"
+        }
+      ]
+    },
+    {
+      "name": "va-button-segmented",
+      "totalPRs": 5,
+      "merged": 4,
+      "mergeRate": "80.0",
+      "byType": {
+        "Other": 3,
+        "Feature": 2
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 5
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1779,
+          "title": "va-button-segmented: Update details payload for analytics event",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1779"
+        },
+        {
+          "number": 1762,
+          "title": "va-button-segmented: Update styles for two/three buttons",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1762"
+        },
+        {
+          "number": 1678,
+          "title": "va-button-segmented: update focus state style to use default yellow outline",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1678"
+        }
+      ]
+    },
+    {
+      "name": "va-button",
+      "totalPRs": 4,
+      "merged": 3,
+      "mergeRate": "75.0",
+      "byType": {
+        "Other": 2,
+        "Accessibility": 1,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "ediiotero",
+          "count": 2
+        },
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2023,
+          "title": "va-button: submit fire order",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2023"
+        },
+        {
+          "number": 1972,
+          "title": "va-button: Revert PR #1946 \"VaButton submit fire order\"",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1972"
+        },
+        {
+          "number": 1732,
+          "title": "VA-button: Feedback variant",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1732"
+        }
+      ]
+    },
+    {
+      "name": "va-additional-info",
+      "totalPRs": 4,
+      "merged": 4,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 4
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "babsdenney",
+          "count": 1
+        },
+        {
+          "author": "longmd",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2004,
+          "title": "va-additional-info: fix for focus border getting cut off at the bottom of drawer",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2004"
+        },
+        {
+          "number": 1746,
+          "title": "va-additional-info, va-alert-expandable, va-memorable-date: adjust slot styles",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1746"
+        },
+        {
+          "number": 1638,
+          "title": "va-additional-info: Updated the vertical bar width from 7px to 4px",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1638"
+        }
+      ]
+    },
+    {
+      "name": "va-accordion-item",
+      "totalPRs": 4,
+      "merged": 4,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 4
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 3
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1935,
+          "title": "va-accordion-item: Update markup structure for headline slots to allow keyboard actviation on NVDA",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1935"
+        },
+        {
+          "number": 1835,
+          "title": "va-accordion-item: prevent selection of non-direct children as slot header",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1835"
+        },
+        {
+          "number": 1741,
+          "title": "va-accordion-item: Update headline slot approach to resolve unescaped HTML entities",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1741"
+        }
+      ]
+    },
+    {
+      "name": "va-omb-info",
+      "totalPRs": 4,
+      "merged": 4,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 3,
+        "Other": 1
+      },
+      "topContributors": [
+        {
+          "author": "amyleadem",
+          "count": 2
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1909,
+          "title": "va-omb-info: Add logic to convert respondent burdern to hours & minutes",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1909"
+        },
+        {
+          "number": 1905,
+          "title": "va-omb-info: add clickToClose to modal",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1905"
+        },
+        {
+          "number": 1740,
+          "title": "va-omb-info: Remove \"View\" from privacy act statement button",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1740"
+        }
+      ]
+    },
+    {
+      "name": "va-link-action",
+      "totalPRs": 4,
+      "merged": 4,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 3,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "humancompanion-usds",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1861,
+          "title": "va-link-action: remove double focus outline",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1861"
+        },
+        {
+          "number": 1820,
+          "title": "va-link-action: underline link on primary version",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1820"
+        },
+        {
+          "number": 1634,
+          "title": "`<va-link-action>` - Show icons in print preview",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1634"
+        }
+      ]
+    },
+    {
+      "name": "va-alert-expandable",
+      "totalPRs": 4,
+      "merged": 4,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 2,
+        "Accessibility": 1,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "longmd",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1840,
+          "title": "va-alert-expandable: update screen reader text with alert status",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1840"
+        },
+        {
+          "number": 1709,
+          "title": "va-alert-expandable: remove error variation",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1709"
+        },
+        {
+          "number": 1683,
+          "title": "va-alert-expandable: Fix TypeError on render",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1683"
+        }
+      ]
+    },
+    {
+      "name": "va-search-filter",
+      "totalPRs": 4,
+      "merged": 4,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 2,
+        "Other": 2
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1632,
+          "title": "va-search-filter: add additional sr-only text to facet titles",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1632"
+        },
+        {
+          "number": 1611,
+          "title": "va-search-filter: make headings consistent across breakpoints",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1611"
+        },
+        {
+          "number": 1609,
+          "title": "va-search-filter: update accordion-items to be heading level 3",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1609"
+        }
+      ]
+    },
+    {
+      "name": "va-on-this-page",
+      "totalPRs": 3,
+      "merged": 3,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 2,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "amyleadem",
+          "count": 2
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2031,
+          "title": "va-on-this-page: Filter sr-only text from h2 link content",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2031"
+        },
+        {
+          "number": 1759,
+          "title": "va-on-this-page: Convert title list item to a header element",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1759"
+        },
+        {
+          "number": 1681,
+          "title": "va-on-this-page: Fix VoiceOver focus behavior",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1681"
+        }
+      ]
+    },
+    {
+      "name": "va-card-status",
+      "totalPRs": 3,
+      "merged": 3,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 2,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "jeana-adhoc",
+          "count": 1
+        },
+        {
+          "author": "ediiotero",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1990,
+          "title": "va-card-status: Make `headerText`, `linkHref`, and `linkText` props required",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1990"
+        },
+        {
+          "number": 1964,
+          "title": "va-card-status: Update doc link",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1964"
+        },
+        {
+          "number": 1862,
+          "title": "va-card-status: add new component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1862"
+        }
+      ]
+    },
+    {
+      "name": "va-search-input",
+      "totalPRs": 3,
+      "merged": 3,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1,
+        "Accessibility": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "ediiotero",
+          "count": 2
+        },
+        {
+          "author": "jeana-adhoc",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1970,
+          "title": "va-search-input: override camelCase story name",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1970"
+        },
+        {
+          "number": 1655,
+          "title": "va-search-input: remove aria-autocomplete from search icon button",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1655"
+        },
+        {
+          "number": 1649,
+          "title": "va-search-input: add accessible name to search icon on small screens",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1649"
+        }
+      ]
+    },
+    {
+      "name": "va-select",
+      "totalPRs": 3,
+      "merged": 3,
+      "mergeRate": "100.0",
+      "byType": {
+        "Accessibility": 1,
+        "Feature": 2
+      },
+      "topContributors": [
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        },
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1858,
+          "title": "va-select: Remove unused aria-live-region-text attribute from Storybook",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1858"
+        },
+        {
+          "number": 1824,
+          "title": "va-select: add label-header-level prop",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1824"
+        },
+        {
+          "number": 1776,
+          "title": "Storybook: add month-select to the form pattern month dropdown story",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1776"
+        }
+      ]
+    },
+    {
+      "name": "va-radio",
+      "totalPRs": 3,
+      "merged": 1,
+      "mergeRate": "33.3",
+      "byType": {
+        "Other": 2,
+        "Accessibility": 1
+      },
+      "topContributors": [
+        {
+          "author": "macalemid",
+          "count": 1
+        },
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1857,
+          "title": "search filter radio buttons",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1857"
+        },
+        {
+          "number": 1724,
+          "title": "va-radio and va-telephone-input: Improve consistency of the error message screen reader announcement",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1724"
+        },
+        {
+          "number": 1561,
+          "title": "va-radio: arrow key accessibility",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1561"
+        }
+      ]
+    },
+    {
+      "name": "va-textarea",
+      "totalPRs": 3,
+      "merged": 3,
+      "mergeRate": "100.0",
+      "byType": {
+        "Bug Fix": 3
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "amyleadem",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1848,
+          "title": "<va-textarea> & <va-text-input>: Fix char count iOS VoiceOver bug",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1848"
+        },
+        {
+          "number": 1768,
+          "title": "va-textarea: Fix horizontal overflow at high zoom",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1768"
+        },
+        {
+          "number": 1629,
+          "title": "va-textarea: Fix hint to ensure font-weight is normal",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1629"
+        }
+      ]
+    },
+    {
+      "name": "va-telephone",
+      "totalPRs": 3,
+      "merged": 3,
+      "mergeRate": "100.0",
+      "byType": {
+        "Bug Fix": 1,
+        "Other": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 2
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1815,
+          "title": "va-telephone: fix bug where extensions were not rendering for international phone numbers",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1815"
+        },
+        {
+          "number": 1695,
+          "title": "va-telephone: format phone number if country code defined",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1695"
+        },
+        {
+          "number": 1641,
+          "title": "va-telephone - Add disable-analytics prop",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1641"
+        }
+      ]
+    },
+    {
+      "name": "va-tabs",
+      "totalPRs": 3,
+      "merged": 2,
+      "mergeRate": "66.7",
+      "byType": {
+        "Feature": 3
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        },
+        {
+          "author": "babsdenney",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1797,
+          "title": "Tabs: Update va-tabs stories with new tab labels and content",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1797"
+        },
+        {
+          "number": 1693,
+          "title": "va-tabs: Add new component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1693"
+        },
+        {
+          "number": 1666,
+          "title": "va-tabs - Add component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1666"
+        }
+      ]
+    },
+    {
+      "name": "va-critical-action",
+      "totalPRs": 3,
+      "merged": 2,
+      "mergeRate": "66.7",
+      "byType": {
+        "Other": 2,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "bellepx0",
+          "count": 3
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1651,
+          "title": "va-critical-action & va-service-list-item: Update maturity levels",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1651"
+        },
+        {
+          "number": 1576,
+          "title": "va-critical-action: update padding",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1576"
+        },
+        {
+          "number": 1563,
+          "title": "va-critical-action: staging review updates",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1563"
+        }
+      ]
+    },
+    {
+      "name": "va-details",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Bug Fix": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "amyleadem",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 2021,
+          "title": "Fix va-details interaction in iOS VoiceOver ",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2021"
+        },
+        {
+          "number": 2015,
+          "title": "va-details: add component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/2015"
+        }
+      ]
+    },
+    {
+      "name": "va-maintenance-banner",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 2
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        },
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1988,
+          "title": "va-maintenance-banner: Prevent additional slot from rendering in light DOM",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1988"
+        },
+        {
+          "number": 1898,
+          "title": "va-maintenance-banner: add header level prop",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1898"
+        }
+      ]
+    },
+    {
+      "name": "va-card",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jeana-adhoc",
+          "count": 1
+        },
+        {
+          "author": "humancompanion-usds",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1985,
+          "title": "card-status: Updates verbs in property table",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1985"
+        },
+        {
+          "number": 1640,
+          "title": "va-card: Add variation which adds an icon at the top, center",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1640"
+        }
+      ]
+    },
+    {
+      "name": "va-language-toggle",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Accessibility": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1968,
+          "title": "va-language-toggle: update aria-current to a valid value",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1968"
+        },
+        {
+          "number": 1967,
+          "title": "va-language-toggle: add selected language to aria-label",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1967"
+        }
+      ]
+    },
+    {
+      "name": "va-pagination",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1,
+        "Accessibility": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1956,
+          "title": "va-pagination: replace constructed SVG icon with va-icon",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1956"
+        },
+        {
+          "number": 1916,
+          "title": "va-pagination: update aria-labels to include total pages in each label",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1916"
+        }
+      ]
+    },
+    {
+      "name": "va-progress-bar",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "it-harrison",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1912,
+          "title": "va-progress-bar: use sass file",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1912"
+        },
+        {
+          "number": 1876,
+          "title": "va-progress-bar: add noSr prop to suppress sr updates",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1876"
+        }
+      ]
+    },
+    {
+      "name": "va-crisis-line-modal",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 2
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1895,
+          "title": "va-crisis-line-modal: add option to only render modal, open modal via custom document event",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1895"
+        },
+        {
+          "number": 1841,
+          "title": "va-crisis-line-modal: add params for phone numbers and links, add an option for a custom trigger element",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1841"
+        }
+      ]
+    },
+    {
+      "name": "va-checkbox",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1674,
+          "title": "va-checkbox: update analytics logic for handling description",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1674"
+        },
+        {
+          "number": 1588,
+          "title": "va-checkbox: add normalized font size to description text",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1588"
+        }
+      ]
+    },
+    {
+      "name": "va-alert-sign-in",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 2
+      },
+      "topContributors": [
+        {
+          "author": "danbrady",
+          "count": 1
+        },
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1650,
+          "title": "va-alert-sign-in: Update storybook button examples",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1650"
+        },
+        {
+          "number": 1613,
+          "title": "va-alert-sign-in: replace straight apostrophes with curly ones",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1613"
+        }
+      ]
+    },
+    {
+      "name": "va-checkbox-group",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Bug Fix": 1,
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 2
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1648,
+          "title": "va-checkbox-group & va-radio - Fix font-weight of hint when both hint and error are set",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1648"
+        },
+        {
+          "number": 1645,
+          "title": "va-checkbox-group & va-radio - Add Storybook variations for tile hint and error",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1645"
+        }
+      ]
+    },
+    {
+      "name": "va-loading-indicator",
+      "totalPRs": 2,
+      "merged": 1,
+      "mergeRate": "50.0",
+      "byType": {
+        "Feature": 1,
+        "Bug Fix": 1
+      },
+      "topContributors": [
+        {
+          "author": "seesleestak",
+          "count": 1
+        },
+        {
+          "author": "longmd",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1612,
+          "title": "va-loading-indicator: Adding inline",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1612"
+        },
+        {
+          "number": 1577,
+          "title": "va-loading-indicator: fix TypeError",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1577"
+        }
+      ]
+    },
+    {
+      "name": "va-service-list-item",
+      "totalPRs": 2,
+      "merged": 2,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 2
+      },
+      "topContributors": [
+        {
+          "author": "bellepx0",
+          "count": 1
+        },
+        {
+          "author": "adamwhitlock1",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1584,
+          "title": "va-service-list-item: update focus & active state style",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1584"
+        },
+        {
+          "number": 1569,
+          "title": "va-service-list-item: support all va-link props via shared interface",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1569"
+        }
+      ]
+    },
+    {
+      "name": "va-radio-option",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1987,
+          "title": "va-radio-option: add additional override styles to the label",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1987"
+        }
+      ]
+    },
+    {
+      "name": "va-sort",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1963,
+          "title": "va-sort: add new component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1963"
+        }
+      ]
+    },
+    {
+      "name": "va-privacy-agreement",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Testing": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1936,
+          "title": "va-privacy-agreement: update skipped tests to resolve flakiness",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1936"
+        }
+      ]
+    },
+    {
+      "name": "va-tag",
+      "totalPRs": 1,
+      "merged": 0,
+      "mergeRate": "0.0",
+      "byType": {
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1808,
+          "title": "<va-tag>: Add new web component",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1808"
+        }
+      ]
+    },
+    {
+      "name": "va-button-icon",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1
+      },
+      "topContributors": [
+        {
+          "author": "RyanMunsch",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1667,
+          "title": "va-button-icon - Update spacing between icon and label text",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1667"
+        }
+      ]
+    },
+    {
+      "name": "va-breadcrumbs",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1
+      },
+      "topContributors": [
+        {
+          "author": "powellkerry",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1659,
+          "title": "va-breadcrumbs: storybook home-veterans-affairs prop not working",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1659"
+        }
+      ]
+    },
+    {
+      "name": "va-statement-of-truth",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "longmd",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1654,
+          "title": "va-statement-of-truth: add prop to hide legal note",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1654"
+        }
+      ]
+    },
+    {
+      "name": "va-promo-banner",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Other": 1
+      },
+      "topContributors": [
+        {
+          "author": "humancompanion-usds",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1653,
+          "title": "va-promo-banner: update maturity level to deprecated",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1653"
+        }
+      ]
+    },
+    {
+      "name": "va-need-help",
+      "totalPRs": 1,
+      "merged": 0,
+      "mergeRate": "0.0",
+      "byType": {
+        "Other": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1636,
+          "title": "va-need-help: update header font-weight",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1636"
+        }
+      ]
+    },
+    {
+      "name": "va-breadcrumb",
+      "totalPRs": 1,
+      "merged": 1,
+      "mergeRate": "100.0",
+      "byType": {
+        "Feature": 1
+      },
+      "topContributors": [
+        {
+          "author": "jamigibbs",
+          "count": 1
+        }
+      ],
+      "examplePRs": [
+        {
+          "number": 1565,
+          "title": "va-breadcrumb: add prop to conditionally use #content or a custom href for the current page",
+          "url": "https://github.com/department-of-veterans-affairs/component-library/pull/1565"
+        }
+      ]
+    }
+  ],
+  "typeDistribution": [
+    {
+      "type": "Other",
+      "count": 116,
+      "percentage": "24.4"
+    },
+    {
+      "type": "Feature",
+      "count": 96,
+      "percentage": "20.2"
+    },
+    {
+      "type": "Bug Fix",
+      "count": 34,
+      "percentage": "7.2"
+    },
+    {
+      "type": "Accessibility",
+      "count": 10,
+      "percentage": "2.1"
+    },
+    {
+      "type": "Testing",
+      "count": 3,
+      "percentage": "0.6"
+    }
+  ],
+  "categories": [
+    {
+      "category": "Form Controls",
+      "components": 12,
+      "totalPRs": 89
+    },
+    {
+      "category": "Feedback & Messaging",
+      "components": 5,
+      "totalPRs": 33
+    },
+    {
+      "category": "Navigation",
+      "components": 7,
+      "totalPRs": 32
+    },
+    {
+      "category": "Data Display",
+      "components": 4,
+      "totalPRs": 13
+    },
+    {
+      "category": "Actions",
+      "components": 3,
+      "totalPRs": 9
+    },
+    {
+      "category": "Layout & Structure",
+      "components": 0,
+      "totalPRs": 0
+    },
+    {
+      "category": "Typography & Media",
+      "components": 4,
+      "totalPRs": 15
+    }
+  ],
+  "needsAttention": [
+    {
+      "name": "va-link",
+      "totalPRs": 8,
+      "bugFixes": 5,
+      "bugFixRatio": "62.5%"
+    }
+  ],
+  "mostActive": [
+    {
+      "name": "va-file-input",
+      "developmentPRs": 16,
+      "features": 16,
+      "refactors": 0
+    },
+    {
+      "name": "va-memorable-date",
+      "developmentPRs": 7,
+      "features": 7,
+      "refactors": 0
+    },
+    {
+      "name": "va-table",
+      "developmentPRs": 6,
+      "features": 6,
+      "refactors": 0
+    },
+    {
+      "name": "va-alert",
+      "developmentPRs": 5,
+      "features": 5,
+      "refactors": 0
+    },
+    {
+      "name": "va-text-input",
+      "developmentPRs": 5,
+      "features": 5,
+      "refactors": 0
+    },
+    {
+      "name": "va-icon",
+      "developmentPRs": 5,
+      "features": 5,
+      "refactors": 0
+    },
+    {
+      "name": "va-additional-info",
+      "developmentPRs": 4,
+      "features": 4,
+      "refactors": 0
+    },
+    {
+      "name": "va-file-input-multiple",
+      "developmentPRs": 3,
+      "features": 3,
+      "refactors": 0
+    },
+    {
+      "name": "va-omb-info",
+      "developmentPRs": 3,
+      "features": 3,
+      "refactors": 0
+    },
+    {
+      "name": "va-tabs",
+      "developmentPRs": 3,
+      "features": 3,
+      "refactors": 0
+    },
+    {
+      "name": "va-modal",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-input-telephone",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-sidenav",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-button-segmented",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-search-filter",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-select",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-maintenance-banner",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-crisis-line-modal",
+      "developmentPRs": 2,
+      "features": 2,
+      "refactors": 0
+    },
+    {
+      "name": "va-combo-box",
+      "developmentPRs": 1,
+      "features": 1,
+      "refactors": 0
+    },
+    {
+      "name": "va-link",
+      "developmentPRs": 1,
+      "features": 1,
+      "refactors": 0
+    }
+  ]
+}

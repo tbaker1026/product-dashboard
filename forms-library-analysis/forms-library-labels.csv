@@ -1,0 +1,14 @@
+Label,Total PRs,Merged,Merge Rate,Category
+"forms-library",422,283,67.1%,Other
+"DO NOT MERGE",26,0,0.0%,Blockers & Status
+"frontend",11,7,63.6%,Technical Domains
+"dependents-benefits",7,4,57.1%,Form Teams
+"platform",4,3,75.0%,Technical Domains
+"Stale",3,0,0.0%,Blockers & Status
+"enhancement",2,2,100.0%,Work Types
+"pension-benefits",2,2,100.0%,Form Teams
+"21-4192",1,1,100.0%,Form Types
+"documentation",1,1,100.0%,Work Types
+"bug",1,1,100.0%,Work Types
+"pension-income-assets",1,1,100.0%,Form Teams
+"Dependency Verification",1,1,100.0%,Other

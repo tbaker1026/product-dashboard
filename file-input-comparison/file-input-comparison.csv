@@ -1,0 +1,15 @@
+Metric,FileField,va-file-input-multiple,Difference
+Lines of Code,848,606,242 lines (29% reduction)
+Files Using,25,14,11 migration opportunity
+Applications,10,8,2 apps to migrate
+Features,20,17,Comparable
+Error Types,6,6,Similar coverage
+React Hooks,15,17,-2 fewer hooks
+Functions,60,52,8 fewer functions
+State Variables,6,5,1 fewer states
+Time to Implement,2-3 hours,15-30 minutes,1.5-2.5 hours saved
+Maintenance,High,Low,Reduced burden
+Error Proneness,High,Low,Reduced errors
+Type,Custom React,Web Component,Standards-based
+Design System,No,Yes,Better integration
+Accessibility,Manual,Automatic,WCAG compliant

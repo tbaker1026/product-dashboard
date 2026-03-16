@@ -1,0 +1,88 @@
+{
+  "FileField": {
+    "name": "FileField (Legacy React Component)",
+    "type": "Custom React Component",
+    "files": [
+      "FileField.jsx"
+    ],
+    "linesOfCode": 848,
+    "features": [
+      "Multiple file upload",
+      "File size validation",
+      "File type validation",
+      "Encrypted PDF support with password",
+      "Upload progress bar",
+      "File removal with confirmation modal",
+      "Attachment ID field",
+      "Attachment name field",
+      "Custom error messages",
+      "Custom alert messages",
+      "Review mode display",
+      "Cancel upload",
+      "Retry upload",
+      "Short workflow mode",
+      "File list display",
+      "Password input for encrypted PDFs",
+      "Custom button text",
+      "Delete confirmation modal",
+      "Focus management",
+      "Accessibility features (aria-labels)"
+    ],
+    "errorMessages": [],
+    "complexity": "High",
+    "usage": 25,
+    "applications": [
+      "_mock-form-ae-design-patterns",
+      "appeals",
+      "disability-benefits",
+      "ivc-champva",
+      "lgy",
+      "medallions",
+      "pre-need-integration",
+      "pre-need",
+      "representative-form-upload",
+      "simple-forms"
+    ]
+  },
+  "VaFileInput": {
+    "name": "va-file-input-multiple (Web Component)",
+    "type": "Web Component Wrapper",
+    "files": [
+      "VaFileInputMultipleField.jsx",
+      "fileInputMultiplePattern.jsx"
+    ],
+    "linesOfCode": 606,
+    "features": [
+      "Multiple file upload",
+      "File size validation (min/max)",
+      "File type validation",
+      "Encrypted PDF support with password",
+      "Upload progress bar",
+      "File removal",
+      "Additional input support (slots)",
+      "Custom error messages",
+      "Review mode display",
+      "Web Component (Shadow DOM)",
+      "Standardized VA design system",
+      "Automatic accessibility",
+      "Built-in error handling",
+      "Password debouncing",
+      "Skip upload for development",
+      "Prefill support",
+      "Form number integration"
+    ],
+    "errorMessages": [],
+    "complexity": "Low",
+    "usage": 14,
+    "applications": [
+      "claims-status",
+      "ds-v3-playground",
+      "income-and-asset-statement",
+      "ivc-champva",
+      "medical-expense-report",
+      "simple-forms",
+      "survivors-benefits",
+      "time-of-need"
+    ]
+  }
+}

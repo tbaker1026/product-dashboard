@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forms Sprint Planning - Themed Story Groups</title>
+<style>
+  :root {
+    --color-bg: #f5f5f5;
+    --color-card: #ffffff;
+    --color-primary: #003e73;
+    --color-secondary: #005ea2;
+    --color-accent: #e31c3d;
+    --color-success: #2e8540;
+    --color-warning: #fdb81e;
+    --color-info: #02bfe7;
+    --color-muted: #71767a;
+    --color-border: #dfe1e2;
+    --shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--color-bg); color: #1b1b1b; line-height: 1.5; }
+  .header { background: var(--color-primary); color: white; padding: 24px 32px; }
+  .header h1 { font-size: 28px; font-weight: 700; }
+  .header p { opacity: 0.85; margin-top: 4px; font-size: 16px; }
+  .summary-bar { display: flex; gap: 16px; flex-wrap: wrap; padding: 16px 32px; background: white; border-bottom: 2px solid var(--color-border); }
+  .stat { text-align: center; padding: 8px 20px; border-right: 1px solid var(--color-border); }
+  .stat:last-child { border-right: none; }
+  .stat .num { font-size: 28px; font-weight: 700; color: var(--color-secondary); }
+  .stat .label { font-size: 12px; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .controls { padding: 16px 32px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .controls label { font-weight: 600; font-size: 14px; }
+  .controls select, .controls input { padding: 6px 12px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 14px; }
+  .controls input[type="text"] { width: 260px; }
+  .btn-group { display: flex; gap: 4px; }
+  .btn-toggle { padding: 6px 14px; border: 1px solid var(--color-border); background: white; cursor: pointer; font-size: 13px; border-radius: 4px; }
+  .btn-toggle.active { background: var(--color-secondary); color: white; border-color: var(--color-secondary); }
+  .content { padding: 16px 32px 48px; }
+  .theme-group { margin-bottom: 28px; }
+  .theme-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--color-primary); color: white; border-radius: 8px 8px 0 0; cursor: pointer; user-select: none; }
+  .theme-header:hover { background: #004d8a; }
+  .theme-header h2 { font-size: 18px; flex: 1; }
+  .theme-header .badge { background: rgba(255,255,255,0.2); padding: 2px 10px; border-radius: 12px; font-size: 13px; }
+  .theme-header .pts { background: var(--color-warning); color: #1b1b1b; padding: 2px 10px; border-radius: 12px; font-size: 13px; font-weight: 700; }
+  .theme-header .chevron { font-size: 18px; transition: transform 0.2s; }
+  .theme-header.collapsed .chevron { transform: rotate(-90deg); }
+  .theme-body { border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; }
+  .theme-body.hidden { display: none; }
+  .story-row { display: grid; grid-template-columns: 50px 1fr 100px 90px 80px 70px; align-items: center; padding: 10px 16px; border-bottom: 1px solid #f0f0f0; background: white; font-size: 14px; transition: background 0.15s; }
+  .story-row:hover { background: #f0f7ff; }
+  .story-row:last-child { border-bottom: none; }
+  .story-row .idx { color: var(--color-muted); font-size: 12px; font-weight: 600; }
+  .story-row .title a { color: var(--color-secondary); text-decoration: none; font-weight: 600; }
+  .story-row .title a:hover { text-decoration: underline; }
+  .story-row .assignee { font-size: 12px; color: var(--color-muted); }
+  .story-row .sprint { font-size: 12px; }
+  .story-row .points { text-align: center; }
+  .story-row .status-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; }
+  .status-in-progress { background: #d4edda; color: #155724; }
+  .status-ready { background: #cce5ff; color: #004085; }
+  .status-needs-review { background: #fff3cd; color: #856404; }
+  .status-blocked { background: #f8d7da; color: #721c24; }
+  .status-plan { background: #e2e3e5; color: #383d41; }
+  .status-pr-review { background: #d1ecf1; color: #0c5460; }
+  .status-qa { background: #d4edda; color: #155724; }
+  .status-icebox { background: #e2e3e5; color: #71767a; }
+  .points-chip { display: inline-block; width: 28px; height: 28px; line-height: 28px; text-align: center; border-radius: 50%; font-weight: 700; font-size: 13px; }
+  .pts-1 { background: #d4edda; color: #155724; }
+  .pts-2 { background: #cce5ff; color: #004085; }
+  .pts-3 { background: #fff3cd; color: #856404; }
+  .pts-5 { background: #f8d7da; color: #721c24; }
+  .notes-icon { cursor: help; color: var(--color-info); font-size: 14px; }
+  .priority-flag { font-size: 11px; font-weight: 700; padding: 1px 6px; border-radius: 3px; margin-left: 6px; }
+  .p1 { background: #e31c3d; color: white; }
+  .p2 { background: #fdb81e; color: #1b1b1b; }
+  .p3 { background: #e2e3e5; color: #383d41; }
+  .planning-poker { padding: 16px 32px; background: #eef6ff; border-bottom: 1px solid var(--color-border); }
+  .planning-poker h3 { font-size: 16px; margin-bottom: 8px; color: var(--color-primary); }
+  .planning-poker p { font-size: 14px; color: #333; }
+  .poker-tips { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 12px; }
+  .poker-tip { background: white; padding: 12px 16px; border-radius: 6px; border-left: 4px solid var(--color-secondary); font-size: 13px; }
+  .poker-tip strong { display: block; margin-bottom: 4px; }
+  .sprint-filter-bar { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sprint-btn { padding: 4px 12px; border: 1px solid var(--color-border); background: white; border-radius: 16px; cursor: pointer; font-size: 12px; font-weight: 600; }
+  .sprint-btn.active { background: var(--color-secondary); color: white; border-color: var(--color-secondary); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; padding: 8px 32px; font-size: 12px; color: var(--color-muted); border-bottom: 1px solid var(--color-border); background: white; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+  @media (max-width: 900px) {
+    .story-row { grid-template-columns: 40px 1fr 80px 70px; }
+    .story-row .assignee, .story-row .sprint { display: none; }
+    .controls { flex-direction: column; }
+  }
+  @media print {
+    .controls, .planning-poker { display: none; }
+    .theme-body.hidden { display: block !important; }
+    .story-row { font-size: 12px; padding: 6px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Forms Sprint Planning Dashboard</h1>
+  <p>Design System & Forms Team | Stories Grouped by Theme for Estimation</p>
+</div>
+
+<div class="summary-bar">
+  <div class="stat"><div class="num" id="totalStories">0</div><div class="label">Total Stories</div></div>
+  <div class="stat"><div class="num" id="totalPoints">0</div><div class="label">Est. Points</div></div>
+  <div class="stat"><div class="num" id="unestimated">0</div><div class="label">Need Estimation</div></div>
+  <div class="stat"><div class="num" id="themeCount">0</div><div class="label">Themes</div></div>
+  <div class="stat"><div class="num" id="blockedCount">0</div><div class="label">Blocked</div></div>
+  <div class="stat"><div class="num" id="inProgressCount">0</div><div class="label">In Progress</div></div>
+</div>
+
+<div class="planning-poker">
+  <h3>Planning Poker Approach</h3>
+  <p>Stories are grouped into themes so the team can estimate related work together, building shared context before pointing. Walk through one theme at a time.</p>
+  <div class="poker-tips">
+    <div class="poker-tip"><strong>Theme-Based Estimation</strong>Each theme below groups related stories. Discuss the theme context once, then point stories within it. This reduces re-explaining domain context for each card.</div>
+    <div class="poker-tip"><strong>Fibonacci Scale: 1, 2, 3, 5</strong>1 = trivial fix, 2 = small well-understood task, 3 = moderate work with some unknowns, 5 = complex work or multiple moving parts. Flag anything above 5 for splitting.</div>
+    <div class="poker-tip"><strong>Focus on Unestimated</strong>Use the filter below to show only stories missing points. Pre-pointed stories can be quickly validated or adjusted. Spend most time on unknowns.</div>
+    <div class="poker-tip"><strong>Sprint Sequencing</strong>Sprint 26 items are current. Use sprint filters to focus discussion. Blocked items need dependency resolution before they can be pointed meaningfully.</div>
+  </div>
+</div>
+
+<div class="controls">
+  <label>Sprint:</label>
+  <div class="sprint-filter-bar" id="sprintFilter">
+    <button class="sprint-btn active" data-sprint="all">All</button>
+    <button class="sprint-btn" data-sprint="Sprint 25">S25</button>
+    <button class="sprint-btn" data-sprint="Sprint 26">S26</button>
+    <button class="sprint-btn" data-sprint="Sprint 27">S27</button>
+    <button class="sprint-btn" data-sprint="Sprint 28">S28</button>
+    <button class="sprint-btn" data-sprint="Backlog">Backlog</button>
+  </div>
+  <label>Status:</label>
+  <select id="statusFilter">
+    <option value="all">All Statuses</option>
+    <option value="In Progress">In Progress</option>
+    <option value="Ready for work">Ready for Work</option>
+    <option value="Needs Review">Needs Review</option>
+    <option value="Plan & prioritize">Plan & Prioritize</option>
+    <option value="Blocked">Blocked</option>
+    <option value="PR review">PR Review</option>
+    <option value="QA">QA</option>
+  </select>
+  <label>Search:</label>
+  <input type="text" id="searchBox" placeholder="Filter by title, assignee, label...">
+  <button class="btn-toggle" id="unestimatedOnly">Show Unestimated Only</button>
+</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="legend-dot" style="background:#d4edda"></span> In Progress / QA</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#cce5ff"></span> Ready for Work</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#fff3cd"></span> Needs Review</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#f8d7da"></span> Blocked</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#d1ecf1"></span> PR Review</div>
+  <div class="legend-item"><span class="legend-dot" style="background:#e2e3e5"></span> Plan / Icebox</div>
+  <div class="legend-item"><span class="priority-flag p1">P1</span> Critical</div>
+  <div class="legend-item"><span class="priority-flag p2">P2</span> High</div>
+  <div class="legend-item"><span class="priority-flag p3">P3</span> Medium</div>
+</div>
+
+<div class="content" id="content"></div>
+
+<script>
+const stories = [
+  // Theme: Array Builder / List & Loop
+  {theme:"Array Builder / List & Loop",title:"[array builder] optional yes/no question should have proper hint text",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5087",assignee:"",sprint:"Sprint 26",points:3,notes:"helps users, can pick up, thorough testing on consumer forms",status:"Ready for work",priority:"",labels:"forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"Add duplicate check warning to the mock-form-patterns multiple response example",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/6018",assignee:"bryanbassett-va",sprint:"Sprint 26",points:3,notes:"helps examples, can pick up, can mimic other form",status:"Needs Review",priority:"",labels:"forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"The ArrayBuilder pattern displays different header sizes on the Review page",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4303",assignee:"",sprint:"Sprint 26",points:3,notes:"helps a11y, may be fixed",status:"Ready for work",priority:"P3",labels:"bug, forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"[Bug] Array Builder - Update focus after a user cancels adding an item",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5316",assignee:"",sprint:"Sprint 26",points:5,notes:"helps users, medium complex",status:"Ready for work",priority:"P3",labels:"508-issue-focus-mgmt, a11y-defect-3, accessibility, bug"},
+  {theme:"Array Builder / List & Loop",title:"[array builder] Improve review page experience (UX + dev)",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5207",assignee:"",sprint:"Sprint 26",points:5,notes:"helps UX, can do",status:"Ready for work",priority:"P2",labels:"bug, forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"[array builder] Add validation for missing intro page",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5328",assignee:"",sprint:"Sprint 26",points:2,notes:"",status:"Ready for work",priority:"",labels:"forms-library"},
+  {theme:"Array Builder / List & Loop",title:"[Bug]: Array Builder spacing issue between form and progress bar",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5782",assignee:"bryanbassett-va",sprint:"Sprint 25",points:2,notes:"",status:"QA",priority:"P2",labels:"bug, forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"Looking for the ability to update label text for Text input and Date input elements",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5178",assignee:"",sprint:"Sprint 26",points:null,notes:"helps customization, able to do",status:"Needs Review",priority:"",labels:"bug, forms-library, va-date, va-text-input"},
+  {theme:"Array Builder / List & Loop",title:"[array builder] save in progress does not return to where you left off in middle of loop",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4490",assignee:"rhasselle-oddball",sprint:"Sprint 27",points:null,notes:"helps long loops, complex, backend also required",status:"Plan & prioritize",priority:"P3",labels:"forms-library, save-in-progress"},
+  {theme:"Array Builder / List & Loop",title:"[array builder] automatically determine if item is missing information",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5165",assignee:"rhasselle-oddball",sprint:"Sprint 27",points:5,notes:"helps devs, difficult",status:"Ready for work",priority:"P3",labels:"forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"[array builder] Fix page rerender losing focus issue",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4469",assignee:"rhasselle-oddball",sprint:"Sprint 28",points:5,notes:"helps a11y, blocked - do refactor first",status:"Plan & prioritize",priority:"",labels:"forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"[Bug] Array builder - Send focus to close button on success alerts",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5318",assignee:"",sprint:"Sprint 28",points:5,notes:"helps a11y, blocked, similar to #4469",status:"Plan & prioritize",priority:"P3",labels:"508-issue-focus-mgmt, a11y-defect-3, accessibility"},
+  {theme:"Array Builder / List & Loop",title:"Array builder list loop | hideIf first parameter formData is inconsistent",url:"https://github.com/department-of-veterans-affairs/va.gov-team/issues/131481",assignee:"rhasselle-oddball",sprint:"Sprint 28",points:null,notes:"helps devs, hard to fix without bigger versioning effort",status:"Plan & prioritize",priority:"",labels:"bug, forms, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"List and loop - Requested changes to pattern to meet IA standards",url:"https://github.com/department-of-veterans-affairs/va.gov-team/issues/117519",assignee:"jeana-adhoc",sprint:"Sprint 28",points:null,notes:"complex rabbit hole, no user value?",status:"Plan & prioritize",priority:"",labels:"forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"request for a change to a prop name (formData, item)",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4425",assignee:"",sprint:"Sprint 28",points:null,notes:"helps devs, lower prio, difficult",status:"Needs Review",priority:"",labels:"forms-library, pattern-multiple-responses"},
+  {theme:"Array Builder / List & Loop",title:"List and loop card links flicker when choosing between yes/no",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/2033",assignee:"",sprint:"",points:3,notes:"",status:"Ready for work",priority:"P2",labels:"array-builder, forms-library, list-and-loop"},
+  {theme:"Array Builder / List & Loop",title:"Discovery: VaMemorableDate component should remove default hint text if a hint is passed",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5263",assignee:"",sprint:"",points:2,notes:"",status:"QA",priority:"P2",labels:"bug, va-memorable-date"},
+  {theme:"Array Builder / List & Loop",title:"[FE] 10-7959c - Font style of header and question for Health insurance information does not match",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/6045",assignee:"bryanbassett-va",sprint:"Sprint 26",points:3,notes:"",status:"PR review",priority:"P3",labels:"pattern-multiple-responses"},
+
+  // Theme: Accessibility & A11y Defects
+  {theme:"Accessibility & A11y Defects",title:"Accordion header error not announced to assistive technology",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5059",assignee:"jeana-adhoc",sprint:"Sprint 26",points:5,notes:"Jeana to review - might not do anything because we might resolve it in the review page redesign",status:"In Progress",priority:"P2",labels:"a11y-defect-2, accessibility, forms-review-page, va-accordion"},
+  {theme:"Accessibility & A11y Defects",title:"Focus bug in va-radio component",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5547",assignee:"",sprint:"Sprint 26",points:1,notes:"Jeana to validate it",status:"Ready for work",priority:"P2",labels:"accessibility, bug, va-radio"},
+  {theme:"Accessibility & A11y Defects",title:"[Bug]: Bryan - Buttons inconsistently labelled for assistive technologies - Review Page",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5785",assignee:"bryanbassett-va",sprint:"Sprint 26",points:3,notes:"",status:"QA",priority:"P3",labels:"a11y-defect-3, accessibility, forms-review-page"},
+  {theme:"Accessibility & A11y Defects",title:"A11y Issue: Start new question modal",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5024",assignee:"",sprint:"Sprint 27",points:null,notes:"",status:"Needs Review",priority:"P3",labels:"a11y-defect-3, accessibility, va-modal"},
+  {theme:"Accessibility & A11y Defects",title:"Android - 'Go' button doesn't move form to next screen",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5031",assignee:"jeana-adhoc",sprint:"Sprint 27",points:3,notes:"",status:"Plan & prioritize",priority:"",labels:"accessibility-review, bug, modality-screen-reader"},
+  {theme:"Accessibility & A11y Defects",title:"[Accessibility]: Duplicate headings for va-accordion-item in review & submit pattern",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5209",assignee:"amyleadem, jeana-adhoc",sprint:"Sprint 28",points:null,notes:"",status:"Plan & prioritize",priority:"P3",labels:"a11y-defect-3, accessibility, forms-review-page"},
+  {theme:"Accessibility & A11y Defects",title:"checkboxGroupUI: No support for message-aria-describedby",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1457",assignee:"",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"design-system"},
+  {theme:"Accessibility & A11y Defects",title:"Broken up text (in code) announces one by one on VoiceOver",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/1592",assignee:"",sprint:"",points:null,notes:"",status:"Icebox",priority:"",labels:"accessibility-review, bug"},
+  {theme:"Accessibility & A11y Defects",title:"Discovery: Investigate why Android 'Go' / Enter key doesn't advance VA forms",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/6029",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"discovery, forms-library"},
+
+  // Theme: Review Page & Error Handling
+  {theme:"Review Page & Error Handling",title:"[Epic]: Review Page Error Alert handling",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/6044",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"platform-design-system-team, va-alert"},
+  {theme:"Review Page & Error Handling",title:"Forms failing to announce errors on submit va-alert",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5798",assignee:"amyleadem",sprint:"",points:5,notes:"",status:"Needs Review",priority:"P2",labels:"a11y-defect-2, va-alert"},
+  {theme:"Review Page & Error Handling",title:"[Accessibility]: Review accordion - Edit button sets focus on the Update Page button",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5949",assignee:"amyleadem, jeana-adhoc",sprint:"",points:null,notes:"",status:"Needs Review",priority:"P2",labels:"a11y-defect-2, accessibility, forms-review-page"},
+  {theme:"Review Page & Error Handling",title:"Add form config reviewErrors docs",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/1615",assignee:"humancompanion-usds",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"DST-engineering, forms-review-page"},
+  {theme:"Review Page & Error Handling",title:"[spike] review page > confirmation page drop off alerting for forms",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5835",assignee:"tbaker1026",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+  {theme:"Review Page & Error Handling",title:"Customer Support - Make error strings globally accessible",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2237",assignee:"amyleadem, humancompanion-usds, rhasselle-oddball",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Review Page & Error Handling",title:"[Accessibility]: Minimal Form Flow - Statement of truth heading does not follow logical order",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5946",assignee:"amyleadem, jeana-adhoc",sprint:"Sprint 27",points:null,notes:"",status:"Blocked",priority:"",labels:"a11y-defect-2, accessibility"},
+
+  // Theme: Prefill Pattern
+  {theme:"Prefill Pattern",title:"Prefill Pattern: Dev work without minimal header",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5901",assignee:"dustin-cintron",sprint:"Sprint 26",points:5,notes:"",status:"PR review",priority:"",labels:"pattern-prefill, pattern-update-prefill"},
+  {theme:"Prefill Pattern",title:"[Bug]: Prefill - Alert headlines should be sentence cased",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5926",assignee:"tbaker1026",sprint:"Sprint 26",points:3,notes:"",status:"PR review",priority:"",labels:"bug, pattern-prefill"},
+  {theme:"Prefill Pattern",title:"[Bug]: Description of Bug Prefill - Remove error summary alert",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/6000",assignee:"it-harrison",sprint:"Sprint 26",points:3,notes:"",status:"PR review",priority:"",labels:"bug, pattern-prefill"},
+  {theme:"Prefill Pattern",title:"[Bug]: Update to deprecate the old ContactInfo - should be using va-link",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5715",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:3,notes:"Leaving in New - left comment for reporter",status:"In Progress",priority:"P1",labels:"bug, pattern-prefill, pattern-update-prefill"},
+  {theme:"Prefill Pattern",title:"Add deprecation warnings and code comments for ContactInfo and older prefill patterns",url:"https://github.com/department-of-veterans-affairs/vets-website/issues/43006",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:3,notes:"",status:"Ready for work",priority:"",labels:"forms-library"},
+  {theme:"Prefill Pattern",title:"Prefill Pattern: Change the phone number card to use va-telephone-input",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5385",assignee:"it-harrison",sprint:"",points:5,notes:"",status:"Blocked",priority:"",labels:"pattern-prefill, pattern-update"},
+  {theme:"Prefill Pattern",title:"20-10206 Prefill",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1006",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"20-10206"},
+  {theme:"Prefill Pattern",title:"Prefill and other important forms-system patterns should run appropriate tests in CI",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5742",assignee:"caw310, tbaker1026",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+
+  // Theme: File Input / Upload
+  {theme:"File Input / Upload",title:"Update Forms System to use new file input / add password",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5792",assignee:"it-harrison",sprint:"Sprint 26",points:5,notes:"",status:"In Progress",priority:"",labels:"forms-library"},
+  {theme:"File Input / Upload",title:"va-file-input: update forms-library to reset file upload progress when upload canceled",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5824",assignee:"it-harrison",sprint:"Sprint 26",points:3,notes:"",status:"In Progress",priority:"",labels:"forms-library"},
+  {theme:"File Input / Upload",title:"File Upload: Placeholder as file name issue",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5889",assignee:"bryanbassett-va",sprint:"Sprint 26",points:5,notes:"",status:"PR review",priority:"",labels:"forms-library, va-file-input"},
+  {theme:"File Input / Upload",title:"Enhance cypress helpers for file input",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5839",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:3,notes:"",status:"PR review",priority:"",labels:"forms-library"},
+  {theme:"File Input / Upload",title:"Prototype file upload array example to mock-form-patterns-v3",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5790",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:2,notes:"",status:"Blocked",priority:"",labels:"forms-library, release-notes"},
+  {theme:"File Input / Upload",title:"File input password claims-status integration",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5849",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+  {theme:"File Input / Upload",title:"Forms support: [FAR/ARM, VaFileInputFieldHelpers]",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/2160",assignee:"rhasselle-oddball",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library, vff-support"},
+  {theme:"File Input / Upload",title:"Ask for Files - Documentation Add forms library link examples",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5999",assignee:"eileen-coforma",sprint:"Sprint 26",points:2,notes:"",status:"In Progress",priority:"",labels:"pattern-files"},
+
+  // Theme: Forms System Safety & CI
+  {theme:"Forms System Safety & CI",title:"[forms-system safety] audit patterns for underscore prefixes in schemas (affects save in progress)",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5808",assignee:"it-harrison",sprint:"Sprint 26",points:3,notes:"",status:"Ready for work",priority:"P1",labels:"forms-library, new-unplanned"},
+  {theme:"Forms System Safety & CI",title:"[forms-system safety] CI to compile form schemas & detect if underscores are being used as a prefix",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5809",assignee:"dominicpadula1",sprint:"Sprint 26",points:5,notes:"",status:"In Progress",priority:"P2",labels:"forms-library"},
+  {theme:"Forms System Safety & CI",title:"[Bug]: PII exposure in va-statement-of-truth",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5905",assignee:"",sprint:"Sprint 26",points:3,notes:"",status:"Ready for work",priority:"",labels:"bug, va-statement-of-truth"},
+  {theme:"Forms System Safety & CI",title:"[forms-system safety] schema changes for patterns/components disallowed without a migration",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5807",assignee:"",sprint:"Sprint 27",points:5,notes:"",status:"Ready for work",priority:"P2",labels:"forms-library"},
+  {theme:"Forms System Safety & CI",title:"Form config validator test should run if teams update their config/form.js",url:"https://github.com/department-of-veterans-affairs/vets-website/issues/42266",assignee:"rhasselle-oddball",sprint:"",points:2,notes:"",status:"In Progress",priority:"",labels:"forms-library"},
+  {theme:"Forms System Safety & CI",title:"Fix flaky vets-api test",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1970",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+
+  // Theme: Yeoman Generator
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] Add revproxy route to initial scaffolding",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4906",assignee:"rhasselle-oddball",sprint:"Sprint 27",points:3,notes:"",status:"Plan & prioritize",priority:"",labels:"yeoman-generator"},
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] Add default cypress and unit tests for new forms",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4771",assignee:"rhasselle-oddball",sprint:"Sprint 28",points:3,notes:"",status:"Plan & prioritize",priority:"",labels:"yeoman-generator"},
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] Improvements based on 4140 additional work",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4975",assignee:"rhasselle-oddball",sprint:"Sprint 28",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] spike - Automatic dependency review in for PRs",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5580",assignee:"",sprint:"Sprint 27",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Yeoman Generator & Tooling",title:"Migrate yeoman generator to node 22",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5542",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] improve yarn new:app to work with new yo",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4909",assignee:"rhasselle-oddball",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] Developer documentation update updates",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4784",assignee:"rhasselle-oddball",sprint:"",points:2,notes:"",status:"Plan & prioritize",priority:"",labels:"DST-engineering, yeoman-generator"},
+  {theme:"Yeoman Generator & Tooling",title:"[yeoman generator] cannot use create form prompt without manually installing 'yo'",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5218",assignee:"",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Yeoman Generator & Tooling",title:"Spike: Boundaries to be included in Forms system package",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5868",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:5,notes:"",status:"Ready for work",priority:"",labels:"forms-library"},
+
+  // Theme: Navigation & UI Components
+  {theme:"Navigation & UI Components",title:"va-breadcrumbs: Breadcrumb update for all forms",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4015",assignee:"",sprint:"",points:null,notes:"Work with public websites on it",status:"Needs Review",priority:"P2",labels:"bug, va-breadcrumbs"},
+  {theme:"Navigation & UI Components",title:"Inconsistent Button Styles for form continue back buttons compared to va-buttons",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1913",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+  {theme:"Navigation & UI Components",title:"Fix Back/Continue buttons imposter components for every form",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5593",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+  {theme:"Navigation & UI Components",title:"Visual scroll position goes to the footer after clicking Continue in forms",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/2124",assignee:"tbaker1026",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"P2",labels:"bug, forms-library"},
+  {theme:"Navigation & UI Components",title:"Form navigation on narrow screens - Needs discovery from Forms",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5021",assignee:"bryanbassett-va",sprint:"Sprint 26",points:null,notes:"",status:"In Progress",priority:"P3",labels:"bug, forms-library"},
+  {theme:"Navigation & UI Components",title:"Create checker for imposter components",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4427",assignee:"rhasselle-oddball",sprint:"",points:3,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Navigation & UI Components",title:"Form 10-10ez: Replace phone number and email imposter components",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5743",assignee:"cadibemma",sprint:"",points:5,notes:"",status:"In Progress",priority:"",labels:"imposter-components, release-notes"},
+  {theme:"Navigation & UI Components",title:"Cannot make first page of form conditional",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5234",assignee:"",sprint:"Sprint 28",points:3,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+
+  // Theme: Address & Contact Patterns
+  {theme:"Address & Contact Patterns",title:"Add 'or territories' to State label in forms library mailing address",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4554",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library, pattern-addresses"},
+  {theme:"Address & Contact Patterns",title:"Handle address invalid formats for street 2/3, city",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5786",assignee:"tbaker1026",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library"},
+  {theme:"Address & Contact Patterns",title:"Address Pattern: Add support for Puerto Rico address to add Urbanization field",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/2157",assignee:"",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"address-pattern, forms-library"},
+  {theme:"Address & Contact Patterns",title:"Update the Country field in Address pattern to use the ISO-3166 list",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1512",assignee:"",sprint:"Sprint 26",points:null,notes:"",status:"Ready for work",priority:"P3",labels:"address-pattern, forms-library"},
+  {theme:"Address & Contact Patterns",title:"Add Contact Info autocomplete support for Safari to multifield form components",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/3654",assignee:"tbaker1026",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"P3",labels:"bug, forms-library"},
+  {theme:"Address & Contact Patterns",title:"Autofill triggers errors in mobile Safari",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/3546",assignee:"",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"P3",labels:"bug, safari"},
+  {theme:"Address & Contact Patterns",title:"API: telephone-validation-service: Missing inline validation on Telephone input",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5656",assignee:"it-harrison",sprint:"Sprint 27",points:5,notes:"",status:"Blocked",priority:"P1",labels:"bug, va-telephone-input"},
+
+  // Theme: Documentation & Design
+  {theme:"Documentation & Design",title:"Multiple responses - Documentation",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5470",assignee:"eileen-coforma",sprint:"Sprint 26",points:5,notes:"",status:"In Progress",priority:"",labels:"documentation-design.va.gov, pattern-multiple-responses"},
+  {theme:"Documentation & Design",title:"Update form digitization documentation",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4904",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:5,notes:"",status:"Ready for work",priority:"",labels:"DST-engineering, forms-library"},
+  {theme:"Documentation & Design",title:"Designs - Mock form re-design",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5224",assignee:"eileen-coforma",sprint:"Sprint 26",points:null,notes:"",status:"Ready for work",priority:"",labels:"forms-library"},
+  {theme:"Documentation & Design",title:"Update AI guidance based on latest round of feedback",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4940",assignee:"rhasselle-oddball",sprint:"Sprint 27",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"AI, DST-engineering"},
+  {theme:"Documentation & Design",title:"update documentation for types such as updateUiSchema",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1048",assignee:"",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"forms-library"},
+  {theme:"Documentation & Design",title:"Mock-form pattern example for Ask a user for a single response - Design",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1467",assignee:"jeana-adhoc",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"design-system"},
+  {theme:"Documentation & Design",title:"Add code links and maturity indicators for patterns in mock-form-patterns",url:"https://github.com/department-of-veterans-affairs/vets-website/issues/43018",assignee:"rhasselle-oddball",sprint:"Sprint 26",points:3,notes:"",status:"Blocked",priority:"",labels:"forms-library"},
+  {theme:"Documentation & Design",title:"Create a new DS and Forms Library onboarding video",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4452",assignee:"rhasselle-oddball",sprint:"",points:5,notes:"",status:"In Progress",priority:"",labels:"DST-engineering, governance-team"},
+  {theme:"Documentation & Design",title:"Pattern to Request Multiple Signatures - Design",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/3813",assignee:"eileen-coforma",sprint:"",points:null,notes:"",status:"Blocked",priority:"",labels:"DST-Design, pattern-new"},
+  {theme:"Documentation & Design",title:"Update Marital Information pattern with VA link about marriage",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4308",assignee:"babsdenney, danbrady, jeana-adhoc",sprint:"",points:null,notes:"Blocked by Content team",status:"Blocked",priority:"",labels:"Figma, pattern-update"},
+
+  // Theme: Save in Progress
+  {theme:"Save in Progress",title:"Investigate alignment between in-progress alerts in introduction page vs form saved page",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4641",assignee:"tbaker1026",sprint:"",points:null,notes:"",status:"Ready for work",priority:"",labels:"bug, save-in-progress"},
+  {theme:"Save in Progress",title:"Save & Progress: Designs for cancelling or deleting an already saved form",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5842",assignee:"",sprint:"",points:null,notes:"",status:"Ready for work",priority:"",labels:"forms-library, save-in-progress"},
+
+  // Theme: Form-Specific Work (21-4138, 20-10206)
+  {theme:"Form-Specific Work",title:"21-4138 Slow roll out of form on production and final testing",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5906",assignee:"dominicpadula1",sprint:"Sprint 26",points:3,notes:"",status:"Ready for work",priority:"",labels:"21-4138"},
+  {theme:"Form-Specific Work",title:"Analytics Implementation or QA Support for Forms Library - Form 21-4138",url:"https://github.com/department-of-veterans-affairs/va.gov-team/issues/138013",assignee:"markfallows",sprint:"",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"analytics-request, collaboration-cycle"},
+  {theme:"Form-Specific Work",title:"Form 20-10206 - unidentified mail research",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5472",assignee:"dominicpadula1",sprint:"",points:5,notes:"",status:"Blocked",priority:"",labels:"20-10206, forms-library"},
+  {theme:"Form-Specific Work",title:"Revert any instance of a month select date variation of Memorable Date from our codified form patterns",url:"https://github.com/department-of-veterans-affairs/VA.gov-team-forms/issues/1552",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"front-end"},
+
+  // Theme: Validation & Input Handling
+  {theme:"Validation & Input Handling",title:"Form system | Custom invalid characters",url:"https://github.com/department-of-veterans-affairs/va.gov-team/issues/135061",assignee:"tbaker1026",sprint:"",points:null,notes:"waiting on Robin to respond",status:"Needs Review",priority:"",labels:"forms-library"},
+
+  // Theme: Infrastructure & Spikes
+  {theme:"Infrastructure & Spikes",title:"spike - support duplicate paths when using feature flags",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/5545",assignee:"",sprint:"Sprint 27",points:null,notes:"",status:"Plan & prioritize",priority:"",labels:"DST-engineering, forms-library"},
+  {theme:"Infrastructure & Spikes",title:"Create PR proposal for initial skills to vets-website",url:"https://github.com/department-of-veterans-affairs/vets-website/issues/42414",assignee:"rhasselle-oddball",sprint:"Sprint 27",points:5,notes:"",status:"Ready for work",priority:"",labels:"forms-library"},
+  {theme:"Infrastructure & Spikes",title:"[Spike] Is it possible to put an application in platform",url:"https://github.com/department-of-veterans-affairs/vets-design-system-documentation/issues/4761",assignee:"",sprint:"Sprint 28",points:3,notes:"",status:"Ready for work",priority:"",labels:"forms-library"},
+  {theme:"Infrastructure & Spikes",title:"Fix FeatureTogglesController redirect loop and filter-chain halts for unauthenticated requests",url:"https://github.com/department-of-veterans-affairs/va.gov-team/issues/130606",assignee:"",sprint:"",points:null,notes:"",status:"Needs Review",priority:"",labels:"forms-library, Identity-Bug"},
+];
+
+// Render
+function getStatusClass(status) {
+  const map = {
+    "In Progress": "status-in-progress",
+    "Ready for work": "status-ready",
+    "Needs Review": "status-needs-review",
+    "Blocked": "status-blocked",
+    "Plan & prioritize": "status-plan",
+    "PR review": "status-pr-review",
+    "QA": "status-qa",
+    "Icebox": "status-icebox",
+  };
+  return map[status] || "status-plan";
+}
+
+function getPointsClass(pts) {
+  if (!pts) return "";
+  return `pts-${pts}`;
+}
+
+function render() {
+  const sprintVal = document.querySelector('.sprint-btn.active')?.dataset.sprint || 'all';
+  const statusVal = document.getElementById('statusFilter').value;
+  const search = document.getElementById('searchBox').value.toLowerCase();
+  const unestOnly = document.getElementById('unestimatedOnly').classList.contains('active');
+
+  let filtered = stories.filter(s => {
+    if (sprintVal !== 'all') {
+      if (sprintVal === 'Backlog' && s.sprint) return false;
+      if (sprintVal !== 'Backlog' && s.sprint !== sprintVal) return false;
+    }
+    if (statusVal !== 'all' && s.status !== statusVal) return false;
+    if (search && !(s.title.toLowerCase().includes(search) || s.assignee.toLowerCase().includes(search) || s.labels.toLowerCase().includes(search) || s.theme.toLowerCase().includes(search))) return false;
+    if (unestOnly && s.points != null) return false;
+    return true;
+  });
+
+  // Group by theme
+  const groups = {};
+  filtered.forEach(s => {
+    if (!groups[s.theme]) groups[s.theme] = [];
+    groups[s.theme].push(s);
+  });
+
+  let totalPts = 0, unest = 0, blocked = 0, inProg = 0;
+  filtered.forEach(s => {
+    if (s.points) totalPts += s.points; else unest++;
+    if (s.status === 'Blocked') blocked++;
+    if (s.status === 'In Progress') inProg++;
+  });
+
+  document.getElementById('totalStories').textContent = filtered.length;
+  document.getElementById('totalPoints').textContent = totalPts;
+  document.getElementById('unestimated').textContent = unest;
+  document.getElementById('themeCount').textContent = Object.keys(groups).length;
+  document.getElementById('blockedCount').textContent = blocked;
+  document.getElementById('inProgressCount').textContent = inProg;
+
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  let idx = 0;
+
+  Object.entries(groups).forEach(([theme, items]) => {
+    const themePts = items.reduce((a, s) => a + (s.points || 0), 0);
+    const themeUnest = items.filter(s => !s.points).length;
+
+    const group = document.createElement('div');
+    group.className = 'theme-group';
+
+    const header = document.createElement('div');
+    header.className = 'theme-header';
+    header.innerHTML = `
+      <span class="chevron">&#9660;</span>
+      <h2>${theme}</h2>
+      <span class="badge">${items.length} stories</span>
+      <span class="pts">${themePts} pts${themeUnest ? ' + ' + themeUnest + ' unest.' : ''}</span>
+    `;
+    header.addEventListener('click', () => {
+      header.classList.toggle('collapsed');
+      body.classList.toggle('hidden');
+    });
+
+    const body = document.createElement('div');
+    body.className = 'theme-body';
+
+    items.forEach(s => {
+      idx++;
+      const row = document.createElement('div');
+      row.className = 'story-row';
+      row.innerHTML = `
+        <div class="idx">#${idx}</div>
+        <div class="title">
+          <a href="${s.url}" target="_blank" rel="noopener">${s.title}</a>
+          ${s.priority ? `<span class="priority-flag ${s.priority.toLowerCase()}">${s.priority}</span>` : ''}
+          ${s.notes ? `<span class="notes-icon" title="${s.notes.replace(/"/g, '&quot;')}">&#128221;</span>` : ''}
+        </div>
+        <div class="assignee">${s.assignee || '<em>unassigned</em>'}</div>
+        <div class="sprint">${s.sprint || 'Backlog'}</div>
+        <div class="points">${s.points ? `<span class="points-chip ${getPointsClass(s.points)}">${s.points}</span>` : '<span style="color:#aaa">--</span>'}</div>
+        <div><span class="status-badge ${getStatusClass(s.status)}">${s.status === 'Plan & prioritize' ? 'Plan' : s.status}</span></div>
+      `;
+      body.appendChild(row);
+    });
+
+    group.appendChild(header);
+    group.appendChild(body);
+    content.appendChild(group);
+  });
+}
+
+// Event listeners
+document.querySelectorAll('.sprint-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.sprint-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  });
+});
+document.getElementById('statusFilter').addEventListener('change', render);
+document.getElementById('searchBox').addEventListener('input', render);
+document.getElementById('unestimatedOnly').addEventListener('click', function() {
+  this.classList.toggle('active');
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
